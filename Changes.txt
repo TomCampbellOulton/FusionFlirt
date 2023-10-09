@@ -1,0 +1,27 @@
+Initially
+-------------
+composite keys
+
+
+Change
+------------
+to link tables
+
+
+
+inputs:
+ranges - 1-5
+text response
+radio response
+number
+
+
+
+1.      a
+	b
+	c
+	d
+
+
+table for questions
+table for answers to questions

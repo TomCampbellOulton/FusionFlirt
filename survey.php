@@ -18,7 +18,7 @@ if ( mysqli_connect_errno() ) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT Question_Number, Question_Section_Letter, Response_Type FROM questions_link_tb WHERE Question_Group = ?')) {
+if ($stmt = $con->prepare('SELECT Question_ID, Question_Number, Question_Section_Letter, fk_Question_Group_ID, Response_Type FROM questions_tb WHERE fk_Question_Group_ID = ?')) {
     // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
     $stmt->bind_param('s', $_POST['survey']);
     $stmt->execute();
@@ -30,7 +30,7 @@ if ($stmt = $con->prepare('SELECT Question_Number, Question_Section_Letter, Resp
     }
 }
 session_regenerate_id();
-$_SESSION['survey'] = $_POST['survey'];
+$_SESSION['survey_ID'] = $_POST['survey'];
 ?>
 	
 <!DOCTYPE html>
@@ -53,8 +53,30 @@ $_SESSION['survey'] = $_POST['survey'];
 		</nav>
 		<div class="content">
 			<h2>Home Page</h2>
-			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-            <p>This is the <?=$_SESSION['survey']?> survey!</p>
+            <form action="save_survey_responses.php" method="post">
+                <!-- First Input -->
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname"><br><br>
+
+                <!-- Second Input -->
+                <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname"><br><br>
+
+                <!-- Iterates through all questions -->
+                <?php
+				if ($stmt = $con->prepare('SELECT Question_ID, Question_Number, Question_Section_Letter, Response_Type FROM questions_tb WHERE fk_Question_Group_ID = ?')) {
+                    $stmt->bind_param('i', $_SESSION['survey_ID']);
+					$stmt->execute();
+				
+				$result = $stmt->get_result();
+				foreach ($result as $row){
+                    echo $row;
+                }
+                    //<!-- Iterates through all answers -->
+            }
+                ?>
+                <!-- Submit Button -->
+                <input type="submit" value="Submit">
 		</div>
 	</body>
 </html>
