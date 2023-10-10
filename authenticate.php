@@ -4,7 +4,7 @@ session_start();
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'phplogin';
+$DATABASE_NAME = 'dating_app_db';
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if ( mysqli_connect_errno() ) {
@@ -17,7 +17,7 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
 	exit('Please fill both the username and password fields!');
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT User_ID, Password_Hash FROM users_tb WHERE Username = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
@@ -38,8 +38,10 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
             header('Location: home.php');
         } else {
             // Incorrect password
-            header('Location: login.html');
+            //header('Location: login.html');
             echo 'Incorrect password!';
+			echo $password;
+			echo $_POST['password'];
         }
     } else {
         // Incorrect username
@@ -49,7 +51,9 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 
 
 	$stmt->close();
-}
+} 
+$_SESSION['name'] = $_POST['username'];
+$_SESSION['id'] = $id;
 ?>
 
 <!DOCTYPE html>
@@ -80,6 +84,14 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 					<tr>
 						<td>Password:</td>
 						<td><?=$password?></td>
+					</tr>
+					<tr>
+						<td>Unhashed Password:</td>
+						<td><?=$_POST['password']?></td>
+					</tr>
+					<tr>
+						<td>Hashed Password:</td>
+						<td><?=password_hash($_POST['password'], PASSWORD_DEFAULT)?></td>
 					</tr>
 					<tr>
 						<td>Email:</td>

@@ -3,7 +3,7 @@
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'phplogin';
+$DATABASE_NAME = 'dating_app_db';
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
@@ -30,7 +30,7 @@ if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
 	exit('Password must be between 5 and 20 characters long!');
 }
 // We need to check if the account with that username exists.
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT User_ID, Password_Hash FROM users_tb WHERE Username = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), hash the password using the PHP password_hash function.
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
@@ -41,19 +41,22 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 		echo 'Username exists, please choose another!';
 	} else {
 		// Username doesn't exists, insert new account
-        if ($stmt = $con->prepare('INSERT INTO accounts (username, password, email, activation_code) VALUES (?, ?, ?, ?)')) {
+        if ($stmt = $con->prepare('INSERT INTO users_tb (Username, Email, Password_Hash, activation_code) VALUES (?, ?, ?, ?)')) {
             // We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $uniqid = uniqid();
-            $stmt->bind_param('ssss', $_POST['username'], $password, $_POST['email'], $uniqid);
-
+            $stmt->bind_param('ssss', $_POST['username'], $_POST['email'], $password, $uniqid);
+			$bonus = ":c";
+			if (password_verify($_POST['password'], $password)){
+				$bonus = "c:";
+			};
             $stmt->execute();
             $from    = 'tcampbelloulton@gmail.com';
             $subject = 'Account Activation Required';
             $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
             // Update the activation variable below
-            $activate_link = 'http://localhost/Secure_Login_System/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
-            $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
+            $activate_link = 'http://localhost/Dating_App/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+            $message = '<p>' . $_POST['password'] . 'Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a>' . $bonus . '</p>';
             mail($_POST['email'], $subject, $message, $headers);
             echo 'Please check your email to activate your account!';
         } else {

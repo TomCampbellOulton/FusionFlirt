@@ -1,0 +1,3 @@
+Changed idea from app to site
+Designing as local host before live hosting
+Print statement is too small to handle the SQL code so i had to convert it to writing into a file T_T

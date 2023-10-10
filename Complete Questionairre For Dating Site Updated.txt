@@ -1,0 +1,1372 @@
+Basic Info (pronouns, identity, etc) 
+1.	What you what from the relationship? 
+a.	Sex 
+b.	Romance 
+c.	Companionship 
+d.	Children 
+e.	Money 
+f.	Other 
+2.	What is your gender identity? Bas
+a.	Male 
+b.	Female 
+c.	Non-binary 
+d.	Genderfluid 
+e.	Bigender 
+f.	Demigender 
+g.	Agender 
+h.	Intersex 
+i.	Polygender 
+j.	Queer 
+k.	Questioning 
+l.	Transgender 
+m.	Prefer not to say 
+n.	Other 
+3.	Sex (Current) 
+a. Male 
+b.	Female 
+c.	Prefer not to say 
+d.	Other 
+4.	Sex (At Birth) 
+a. Male 
+b.	Female 
+c.	Prefer not to say 
+d.	Other 
+5.	Sexual Orientation 
+a.	Allosexual 
+b.	Aromantic 
+c.	Asexual 
+d.	Biromantic 
+e.	Bisexual 
+f.	Demisexual 
+g.	Gay 
+h.	Heterosexual 
+i.	Lesbian 
+j.	Pansexual 
+k.	Queer 
+l.	Questioning 
+m.	Homosexual 
+n.	Polusexual 
+o.	Ace spectrum 
+p.	Aro spectrum 
+q.	Prefer not to say 
+r.	Other 
+6.	Pronouns 
+a.	He/him/him/his/himself 
+b.	She/her/her/hers/herself 
+c.	They/them/their/theirs/themselves 
+d.	Per/per/pers/pers/perself 
+e.	Sie/hir/hir/hirs/hirself 
+f.	Ve/ver/vis/vers/verself 
+g.	Xe/xem/xyr/xyrs/xyrself 
+h.	Zie/zim/zir/zirs/zirself 
+i.	Bun/bunself 
+j.	It/Itself 
+k.	Xeno pronouns 
+l.	Neo pronouns 
+m.	Ghost/ghostself 
+n.	Bee/beeself 
+o.	Grey/greyself 
+q.	Prefer not to say 
+r.	Other 
+7.	Title 
+a.	Mr 
+b.	Mrs 
+c.	Miss 
+d.	Ms 
+e.	Master 
+f.	Mx 
+g.	Sir 
+h.	Dame 
+i.	Dr 
+j.	Cllr 
+k.	Lady 
+l.	Lord 
+m.	Prefer not to say 
+n.	Other 
+8.	Ethnicity (FROM GOV.UK) 
+a.	White 
+b.	Mixed 
+c.	Asian or Asian British 
+d.	Black or Black British 
+e.	Arab 
+f.	Prefer not to say 
+g.	Other 
+9.	Socioeconomic class 
+a.	Lower 
+b.	Working 
+c.	Middle 
+d.	Upper 
+e.	Aristocrat 
+f.	Prefer not to say 
+g.	Other 
+10.	Star sign 
+a.	Aries 
+b.	Taurus 
+c.	Gemini 
+d.	Cancer 
+e.	Leo 
+f.	Virgo 
+g.	Libra 
+h.	Scorpius 
+i.	Prefer not to say 
+j.	Other 
+11.	Spirit Animal: (https://www.wcs.org/wildcards/posts/what-is-your-spiritanimal?gclid=CjwKCAjwiOCgBhAgEiwAjv5whKnoP4_SjoNEzWLSK62UXE7EUqNzrcFr9PhSXs7TLTOZ9XZR65lrrhoCycIQAvD_BwE) 
+a.	_______________________ 
+12.	Birth crystal 
+a.	Garnet (Jan) 
+b.	Amethyst (Feb) 
+c.	Aquamrine (Mar) 
+d.	Diamond (Apr) 
+e.	Emerald (May) 
+f.	Alexandrite (Jun) 
+g.	Ruby (Jul) 
+h.	Peridot/Spinel (Aug) 
+i.	Sapphire (Sep) 
+j.	Tourmaline (Oct) 
+k.	Golden Topaz/ Citrine (Nov) 
+l.	Blue Zircon/ Blue Topaz/ Tanzanite (Dec)
+13. Any criminal history? 
+a.	Felonies 
+b.	Misdemeanours 
+c.	Infractions 
+d.	None 
+e.	Prefer not to say 
+f.	Other 
+14. Allergies 
+a.	Pollen (Hay Fever) 
+b.	Nuts 
+c.	Dairy 
+d.	Gluten 
+e.	Animal Fur 
+f.	Insects (E.g. Wasps, bees) 
+g.	None 
+h.	Prefer not to say 
+i.	Other 
+15. Any pets? 
+a.	Dog 
+b.	Cat 
+c.	Turtle 
+d.	Snake 
+e.	Hamster 
+f.	Rabbit 
+g.	Chickens 
+h.	None 
+i.	Prefer not to say 
+j.	Other 
+Physical Attributes 
+16.	Life expectancy: 
+a.	<5 Years 
+b.	<10 Years 
+c.	<20 Years 
+d.	Don't Know 
+e.	Prefer not to say 
+f.	Other 
+17.	How many piercings do you have? 
+a.	___ Face 
+b.	___ Ear (Total) 
+c.	___ Body 
+18.	Do you have any tattoos?  
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+19.	Average lifespan of ancestors (In years approximately): __ 20. Dietary restrictions: 
+a.	Vegan 
+i.	Optionally ii. For health iii. Environment iv. For ethics of animal treatment v. Other  
+vi. Prefer not to say 
+b.	Vegetarian 
+i.	Optionally ii. For health 
+iii. Environment iv. For ethics of animal treatment v. Other  
+vi. Prefer not to say 
+c.	Pescatarian 
+i.	Optionally ii. For health 
+iii. Environment iv. For ethics of animal treatment v. Other  
+vi. Prefer not to say 
+d.	None 
+e.	Prefer not to say 
+f.	Other 
+21.	Height 
+a.	__cm 
+b.	__ feet __ inches 
+c.	Prefer not to say 
+22.	Weight 
+a.	__ kg 
+b.	__ stone __ pounds 
+c.	Prefer not to say 
+23.	Penis length 
+a.	___ Inches (1dp – no rounding 😉) 
+b.	___ Centimetres 
+c.	Prefer not to say
+24.	Hair colour 
+a.	Blonde 
+b.	Brown 
+c.	Black 
+d.	Ginger 
+e.	Other 
+f.	Prefer not to say 
+25. Is your hair dyed? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+26. Eye colour 
+a.	Blue 
+b.	Green 
+c.	Grey 
+d.	Brown 
+e.	Other? 
+f.	Prefer not to say 
+ 
+Marriage 
+27.	How long would you date someone before considering legal marriage? (Signing the legal documentation) 
+a.	1 year 
+b.	2 years 
+c.	3 years 
+d.	4 years 
+e.	5 years 
+f.	> 5 years 
+g.	Wouldn't marry 
+h.	Prefer not to say 
+28.	How long would you date someone before considering social/religious marriage? (Ceremony and vows but not signing the legal documentation) 
+a.	1 year 
+b.	2 years 
+c.	3 years 
+d.	4 years 
+e.	5 years 
+f.	> 5 years 
+g.	Wouldn't marry 
+h.	Prefer not to say 
+ 
+Finances 
+29.	Do you have health insurance? (NHS included) 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+30.	Electric, petrol or diesel car? 
+a. Public transport only 
+i.	Convenience 
+ii.	Environment 
+b. Electric 
+i.	Cost 
+ii.	Environment 
+iii.	Both 
+c.	Petrol 
+d.	Diesel 
+e.	None 
+f.	Other 
+g.	Prefer not to say 
+31.	How much debt are you in? 
+a.	Student loans 	 
+i.	£___ 
+ii.	Interest rate = ___% 
+b.	Credit cards 
+i.	£___ 
+ii.	Interest rate = ___% 
+c.	Mortgage 
+i.	£___ 
+ii.	Interest rate = ___% 
+d.	Other 
+i. £___ ii. Interest rate = ___% 
+32.	Would you share finances when married? 
+a.	Yes, it's our money, not one or the others. 
+b.	Kind of, we have a joint account for bills and groceries but finances mostly separate. 
+c.	No, we split bills but have finances completely separate 
+d.	Prefer not to say 
+33.	Would you split bills in relationship (rent, food) 
+a.	50/50  (33/33/33, etc) 
+b.	Proportional to salaries 
+c.	Proportional to expendable incomes 
+d.	They pay for it all 
+e.	I pay for it all 
+f.	Prefer not to say 
+34.	Would you pay for their personal "fun things"? (ie, designer clothes, trip without you, etc) 
+a.	No, they pay for their own fun stuff 
+b.	We split it equally 
+c.	I pay for it all 
+d.	Prefer not to say
+35. Salary: 
+a.	<£10,000 
+b.	<£20,000 
+c.	<£30,000 
+d.	<£40,000 
+e.	<£50,000 
+f.	<£60,000 
+g.	<£75,000 
+h.	<£100,000 
+i.	>£100,000 
+j.	Prefer not to say 
+36.	Subscriptions currently owned (Tick Box) 
+a.	Netflix 
+b.	Amazon Prime 
+c.	Apple TV+ 
+d.	Disney Plus 
+e.	NOW 
+f.	BritBox 
+g.	DAZN Hayu 
+h.	Paramount+ 
+i.	Shudder 
+j.	MUBI 
+k.	Youtube Premium 
+l.	BFIPlayer 
+m.	All4 
+n.	Itv X 
+o.	HBO Max 
+p.	None 
+q.	Prefer not to say 
+r.	Other 
+37.	Which subscriptions would you be willing to give up? (Tick Box) 
+a.	Netflix 
+b.	Amazon Prime 
+c.	Apple TV+ 
+d.	Disney Plus 
+e.	NOW 
+f.	BritBox 
+g.	DAZN 
+h.	Paramount+ 
+i.	Shudder 
+j.	MUBI 
+k.	Youtube Premium 
+l.	BFIPlayer 
+m.	All4 
+n.	Itv X 
+o.	None 
+p.	Prefer not to say 
+q.	Other 
+38.	Savings 
+a.	< £5,000 
+b.	< £10,000 
+c.	< £20,000 
+d.	< £40,000 
+e.	< £60,000 
+f.	< £80,000 
+g.	< £100,000 
+h.	> £100,000 
+i.	Prefer not to say 
+39.	Own a house 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+40.	Own an apartment 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+41.	Own a car 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+42.	Do you ride a motorbike? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+43.	Can you drive 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+44. Currently living in a: 
+a.	Flat 
+b.	Trailer 
+c.	Car 
+d.	Couch-surfing 
+e.	Condo 
+f.	Bungalow 
+g.	House 
+h.	Manor 
+i.	Mansion 
+j.	Prefer not to say 
+k.	Other 
+45.	Number of roommates __ 
+46.	Relationship to roommates: 
+a.	Sibling 
+b.	Parent 
+c.	Uncle/Aunt 
+d.	Cousin 
+e.	Friend 
+f.	Randomers 
+g.	Prefer not to say 
+h.	Other 
+ 
+Relationship Statistics 
+47.	Body Count (Number of people you've had sex with) 
+a. 0 
+b. 1 
+c.	2-3 
+d.	4-6 
+e.	7-9 
+f.	> 10 
+g.	Prefer not to say 
+48.	Do you have any STIs? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+49.	Number of partners (Total) ___ 
+50.	Number of sexual partners (Had sexual interactions with) ___ 
+51.	Average length of total relationship ___ (Months) 
+52.	Average length of sexual relationships ___ (Months) 
+53.	Average time of waiting between relationships ___ (Weeks) 
+54.	Average time of dating before sex in relationships ___ (Weeks) 
+55.	Number of sexual relationships without romance (Friends with benefits or one-night stands) ___ 
+56.	How long into the relationship would you want to wait for sex? 
+a.	Straight away 
+b.	2 weeks 
+c.	1 month 
+d.	3 months 
+e.	6 months 
+f.	1 year 
+g.	2 years 
+h.	Engagement 
+i.	Marriage 
+j.	Prefer not to say 
+57.	How long would you be willing to wait for sex in the relationship? 
+a.	Straight away 
+b.	2 weeks 
+c.	1 month 
+d.	3 months 
+e.	6 months 
+f.	1 year 
+g.	2 years 
+h.	Engagement 
+i.	Marriage 
+j.	Prefer not to say 
+58.	Do you still talk to your ex(es)? 
+a.	Yes 
+b.	No 
+c.	Have none  
+d.	Prefer not to say 
+ 
+Life Goals (Children, career aspirations, housing, etc) 
+59.	Number of children currently __ 
+60.	Number of additional children desired: 
+a.	Max = __ 
+b.	Min = __ 
+c.	Not bothered 
+d.	Prefer not to say 
+e.	Other 
+61.	Number of boys desired: 
+a.	Max = __ 
+b.	Min = __ 
+c.	Not bothered 
+d.	Prefer not to say 
+e.	Other 
+62.	Number of girls desired: 
+a.	Max = __ 
+b.	Min = __ 
+c.	Not bothered 
+d.	Prefer not to say 
+e.	Other 
+63.	Where you'd want to live in the future 
+a.	Town 
+b.	City 
+c.	Village 
+d.	Country 
+e.	Seaside 
+f.	Prefer not to say 
+g.	Other 
+64.	Size of house desired 
+a.	Bedrooms 
+i.	1/2
+ii.	3/4
+iii.	5-7
+iv.	>7 
+iv.	Prefer not to say 
+b.	Bathrooms
+i.	1
+ii.	2
+iii.	3
+iv.	>3
+v.	Prefer not to say
+c.	Dining rooms 
+i.	0
+ii.	1
+iii.	2 
+iv.	>2
+v.	Prefer not to say
+e.	Social Rooms (living rooms, drawing rooms) 
+i.	0
+ii.	1
+iii.	2 
+iv.	>2 
+v.	Prefer not to say 
+f.	Cinema rooms? 
+i.	0
+ii.	1 
+iii.	2 
+iv.	>2 
+v.	Prefer not to say 
+g.	Pool 
+i.	Yes 
+ii.	No 
+iii.	Prefer not to say 
+iv.	Don't mind/ unbothered 
+h.	Hot tub 
+i.	Yes 
+ii.	No 
+iii.	Prefer not to say 
+iv.	Don't mind/ unbothered 
+66.	Desired frequency for holidays 
+a.	Every week 
+b.	Every month 
+c.	Every other month 
+d.	Every 3-4 months 
+e.	2-3 times a year 
+f.	Once a year 
+g.	< Once a year 
+h.	Other 
+i.	Prefer not to say 
+67.	Destination for holidays 
+a.	Abroad 
+b.	Locally 
+c.	Interstate 
+d.	Other 
+e.	Prefer not to say 
+68.	Duration of holidays 
+a.	1-3 days 
+b.	4-7 days 
+c.	> 7 days 
+d.
+e. Other 
+69.	Which would you prioritise out of the following? 
+a.	Large garden 
+b.	Large house 
+c.	Expensive holidays 
+d.	Expensive cars 
+e.	Young retirement 
+f.	Raising your children to the best of your ability 
+g.	Prefer to not comment 
+ 
+Licenses 
+70.	Do you own a license for owning exotic animals? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+71.	Do you own a gun's license? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+Love Language 
+72.	Love language (Rank them 1-3) 
+a.	Physical touch 
+b.	Gift giving 
+c.	Gift receiving 
+d.	Words of affirmation 
+e.	Being praised 
+f.	Praising your partner 
+g.	Prefer not to say 
+h.	Other 
+73.	Date ideas 
+74.	Gift ideas (what you'd like) 75. Big spoon or little spoon? 
+a.	Big spoon 
+b.	Little spoon 
+c.	Neither 
+d.	Switch 
+e.	Prefer not to say 
+ 
+Politics And Ethics 
+76.	Political Compass (Numbers from site: https://www.politicalcompass.org/test) 
+a.	Economic Left/Right: ___ 
+b.	Social Libertarian/Authoritarian: ___ 
+77.	Are you a feminist?  (Feminist – an advocate of women's rights based on the equality of the sexes) 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+78.	If you're partner cheats on you, what do you do? 
+a.	Forgive them 
+b.	Leave them 
+c.	Other 
+d.	Prefer not to say 
+e.  
+79.	Do you think motorbikes should be illegal? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+80.	Is hitting your children okay? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+81.	Is beating your partner ever acceptable? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+82.	Are there limits to what you'd let you partner wear in public 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+83.	Do you think the current system for child support is fair?  
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+84.	If the child spends half their time with each parent, should either parent pay child support? a. Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+85.	If the couple break up, without marrying, should their money/assets be shared? a. Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+86.	Do you believe the Earth is flat? 
+a.	Yes 
+b.	No 
+c.
+d. Other 
+87.	Should women have the right to an abortion without fathers consent 
+a.	Yes  
+b.	No 
+c.	Prefer not to say 
+88.	Should men have the right to financially abort the child if they do not wish to support it and the woman refuses to abort it? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+89.	Do you think snitching is acceptable? 
+a.	Yes 
+b.	No 
+c.	Depends 
+i.	If life-threatening; yes 
+ii.	If it will benefit me; yes 
+iii.	Other 
+d.	Prefer not to say 
+e.	Other 
+90.	If you and your partner have a disagreement in public, when do you discuss it? 
+a.	In public where the disagreement happens 
+b.	In the car, in private 
+c.	At home, in private 
+d.	Other 
+e.	Prefer not to say 
+91.	If your partner says something to a group of friends and it turns into an argument but you disagree with them, what do you do? 
+a.	Tell them you disagree and back up the friends 
+b.	Agree with them in the moment and tell them you disagree in private later on 
+c.	Stay neutral and say you can see both sides of the argument 
+d.	Don't comment and try to change the topic 
+e.	Other 
+f.	Prefer not to say 
+92.	Do you think the death penalty should exist for severe crimes? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+93.	Train dilemma: A train is on the tracks to hit two people. There is a leaver you can pull to save those two but kill an innocent person. Do you switch the tracks or leave them? a. Decision 
+i.	Flip the switch 
+ii.	Leave it 
+iii.	Prefer not to say 
+b. Reasons 
+i.	Ethical 
+ii.	Legal (Avoid liability) iii. Other 
+iv. Prefer not to say 
+94.	If you have two children, A and B, and it is A's birthday, does B get a present? 
+a.	Yes 
+b.	No 
+c.	Don't want children 
+d.	Prefer not to say 
+95.	Should school be mandatory? (Including apprenticeships, other forms of education) a. Yes, till 18 
+b.	Yes, till 16 
+c.	Yes, till 12 
+d.	Only for primary 
+e.	Up to parents 
+f.	No 
+g.	Prefer not to say 
+96.	Do you think weed should be legal? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+97.	Do you think alcohol should be legal? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+98.	Do you think that cigarettes should be legal? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+99.	Do you think that drugs should be legal? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+  
+Familial Life 
+100.	Number of siblings __ 
+101.	Which sibling you are: 
+a.	Only child 
+b.	Youngest 
+c.	Second youngest 
+d.	Middle 
+e.	Second Eldest 
+f.	Eldest 
+g.	Other 
+h.
+102.	Do you have an older brother? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+103.	Do you have an older sister? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+104.	Parents still together: 
+a.	Yes 
+b.	No 
+i.	Death 
+ii.	Divorce 
+iii.	Other 
+iv.	Prefer not to say 
+c.	Other 
+d.	Prefer not to say 
+105.	Father figure in your life? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+106.	Mother figure in your life? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+107.	Splitting the bill 
+a.	Half and half 
+b.	Pay for what you order 
+c.	Person who suggests the date pays 
+d.	Take it in turns to pay (every other time) 
+e.	Man pays 
+f.	Woman pays 
+g.	Partner pays 
+h.	Bill split based on salaries 
+i.	Higher earner pays 
+j.	Prefer not to say 
+108.	Would you expect your male partner to fight for you? 
+a.	Yes 
+b.	No 
+c.	We'd fight together 
+d.	Prefer not to say 
+e.	Other 
+ 
+Personality 
+109.	IQ __ (Found at https://iqtest.com/quiz/iq-test/) 
+110.	Are you competitive? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+111.	Can you accept losing at something you care about? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+112.	Do you have to be the best at everything or can your partner be better at some things? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+113.	Favourite colour ink (For pen on paper) 
+a.	Blue 
+b.	Black 
+c.	Pencil 
+d.	Other 
+e.	Prefer not to say? 
+f.	Don't have a preference 
+114. 	Are you a furry? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+115.	Phobias? 
+a.	Heights 
+b.	Spiders 
+c.	Wasps 
+d.	Darkness 
+e.	Small spaces 
+f.	Loneliness 
+g.	Oceans 
+h.	Deep bodies of water 
+i.	None 
+j.	Prefer not to say 
+k.	Other 
+116.	Are you a skateboarder? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+117. 	Dating status: 
+a.	Single 
+b.	In relationship 
+c.	Looking for an additional partner (Polyamory)  
+d.	Prefer not to say 
+ 
+ 
+e.	Other 
+118.	MBTI Type 
+a. Extrovert 
+i. ___% 
+b. Introvert 
+i. ___% 
+c. Sensor 
+i. ___% 
+d. Intuitive 
+i. ___% 
+e. Thinker 
+i. ___% 
+f. Feeler 
+i. ___% 
+g. Judger 
+i. ___% 
+h.	Perceiver 
+i.	___% 
+	i. 	Assertive 
+i.	___% 
+j.	Turbulent 
+i. ___% 
+119.	Smoke? (Cigarettes) 
+a. Yes 
+i.	Only socially on occasion 
+ii.	Once a week 
+iii.	Most days iv. 1-3 a day v. 4-7 a day 
+vi.	8-15 a day 
+vii.	> 15 a day 
+viii.	Prefer not to specify 
+b.	No 
+c.	Prefer not to say 
+120.	New or old Footloose? 
+a.	New 
+b.	Old 
+c.	Never seen either 
+d.	Prefer not to say 
+121.	Would you give up smoking for your partner? (Cigarettes) 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+122.	Drink? (Alcohol) 
+	a.	Yes 
+i.	Only socially on occasion 
+ii.	Once a week (1-2 units) iii. Only at the weekend (1-4 Units)  iv. 4-7 units a week 
+v.	8-12 units a week 
+vi.	>13 units a week 
+vii.	Prefer not to specify 
+b.	No 
+c.	Prefer not to say 
+123.	Physical fitness level? (Qualitative) 
+a.	Very Fit 
+b.	Reasonably Fit 
+c.	Average 
+d.	Unfit 
+e.	Very unfit 
+124.	Have you spent time in the military? 
+a. Yes 
+i. Time 
+1.	<1 year 
+2.	< 3 years 3. < 5 years 
+4.	> 5 years 
+5.	Prefer not to say ii. Tours 
+6.	5. Prefer not to say 
+b.	No 
+c.	Still active duty 
+d.	Other 
+e.	Prefer not to say 
+125.	Would you have farm animals; such as chickens? 
+a.	Yes 
+b.	No 
+c.	Only if partner does 
+d.	Prefer not to say 
+126.	What's your opinion on gambling? 
+a.	It's okay – I do it myself 
+b.	It's okay but I don't partake 
+c.	It's not okay and I don't do it 
+d.	It's not okay but I do it anyway 
+e.	Other 
+f.	Prefer not to say 127. 	Iphone or Android? 
+a.	Iphone 
+b.	Android 
+c.	Neither 
+d.	Prefer not to say 
+	128. 	Shoes – Oxfords of Brogues? 
+ 
+a.	Oxfords 
+b.	Brogues 
+c.	Reference understood 😎 
+d.	??? 
+e.	No preference 
+f.	Prefer not to say 
+ 
+Holidays 
+129.	Do you celebrate Christmas? 
+a. Yes 
+i.	Religiously 
+ii.	Not religiously 
+b.	No 
+c.	Prefer not to say 
+130.	Do you celebrate Valentines? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+131.	Do you celebrate Easter? 
+a. Yes 
+i.	Just eat some chocolate 
+ii.	Easter egg hunts 
+iii.	Prefer not to specify iv. Other 
+b.	No 
+c.	Prefer not to say 
+132.	Do you celebrate Thanksgiving? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+133.	Do you celebrate St Patricks's Day? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+134.	Do you celebrate Halloween? 
+a. Yes 
+i.	Go trick or treating 
+ii.	Welcome trick or treaters, don't do it myself though. 
+iii.	Prefer not to specify iv. Other 
+b.	No 
+c.	Prefer not to say 
+135.	Do you celebrate Chinese New Year? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+136.	Do you celebrate Independence Day? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+137.	Do you celebrate Oktoberfest? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+138.	Do you celebrate Día de Muertos (Day of the Dead) 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+139.	Do you celebrate Hanukkah? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+140.	Do you celebrate Ramadan and Eid al-Fitr 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+141.	Do you celebrate Diwali? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+142.	Do you celebrate Bodhi Day? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+Bedroom Preferences 
+143.	BDSM (Percentages found here: https://bdsmtest.org/) 
+a.	Ageplayer __% 
+b.	Brat __% 
+c.	Exhibitionist __% 
+d.	Voyeur __% 
+e.	Switch __% 
+f.	Slave __% 
+g.	Sadist __% 
+h.	Rope Bunny __% 
+i.	Rigger __% 
+j.	Prey __% 
+k.	Hunter __% 
+l.	Owner __% 
+m.	Non-monogamist __% 
+n.	Boy/girl __% 
+o.	Degradee __% 
+p.	Brat Tamer __% 
+q.	Experimentalist __% 
+r.	Pet __% 
+s.	Degrader __% 
+t.	Daddy/Mommy __% 
+u.	Submissive __% 
+v.	Dominant __% 
+w.	Vanilla __% 
+144.	Do you want the sub/dom dynamic outside the bedroom? (In day-to-day life) 
+a. Yes 
+b.	No 
+c.	Up to partner 
+d.	Prefer not to say 
+e.	Other 
+145.	Frequency of sexual intimacy desired 
+a.	>3 times a day 
+b.	1-3 times a day 
+c.	1-3 times a week 
+d.	1 time a week 
+e.	1-3 times a month 
+f.	1 time a month 
+g.	A few times a year 
+h.	Only to have children 
+Vaccinations 
+146.	Are you vaccinated? 
+a.	Yes (All) 
+b.	Yes (All as a baby, no follow ups including no Covid) 
+c.	Only some 
+d.	None 
+e.	Prefer not to say 
+147.	Will you vaccinate your children? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+ 
+Academics 
+148.	Did you go to a single sex or mixed school? 
+a.	Single 
+b.	Mixed 
+c.	Single then mixed 
+d.	Mixed then single 
+e.	Other 
+f.	Prefer not to say 
+149.	Did you go to a grammar school or a comprehensive school? 
+a.	Grammar 
+b.	Comprehensive 
+c.	Grammar then comprehensive 
+d.	Comprehensive then grammar 
+e.	Other 
+f.	Prefer not to say 
+150.	Have you ever been to a public/private school? 
+a.	I've been to a public school (Fee paying) 
+b.	I've been to a private school (Fee Paying) 
+c.	I've been to a state school (‘Free', paid for in taxes) 
+151.	Average Grades: (A* - E) ___ 
+152.	GCSE Subjects:  ______________________________________________ 153. A-level Subjects: ______________________________________ 154. Do you plan on going/ have you gone to university? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+155.	Are grades more or less important than your relationships? 
+a.	More 
+b.	Equal 
+c.	Less 
+d.	Prefer not to say 
+156.	Are grades more or less important than friendships? 
+a.	More 
+b.	Less 
+c.	Equal 
+d.	Prefer not to say 
+e.	Other 
+ 
+Cooking 
+157.	Can you bake a cake from just flour, eggs, butter, etc. (No pre-made mix) a. Yes 
+b.	No 
+c.	Never tried 
+d.	Prefer not to say 
+158.	Can you make pastry (chaux pastry, puff, shortcrust etc), from just flour, water and butter? Recipes allowed 
+a.	Yes 
+b.	Only some 
+c.	With help 
+d.	No 
+e.	Prefer not to say 
+159.	Can you cook a roast (roast potatoes, roast parsnips, broccoli, carrots, peas, green beans, Yorkshire puddings and beef) without help? 
+a.	Yes 
+b.	No 
+c.	Only some of it 
+d.	Prefer not to say 
+160.	Can you make curry? (No packet sauces, just raw ingredients such as vegetables, meat (not pre-diced)) 
+a.	Yes 
+b.	No 
+c.	I'm unsure 
+d.	Prefer not to say 
+161.	Can you make pancakes from flour, eggs, milk and oil? (No recipes allowed, just from memory) 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+162.	Can you cook an English breakfast according to other peoples specifications? (e.g. the way they want their eggs) (Everything from scratch including hash-browns from SCRATCH) 
+a.	Yes 
+b.	No 
+c.	Some, not all 
+d.	I don't know 
+e.	Prefer not to say 
+163.	Can you make a fruit salad? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+Skills and Attributes 
+164.	Are you good with your hands in regards to DIY (being crafty)? 
+a.	Yes 
+b.	No 
+c.	Alright, not great 
+d.	Prefer not to say 
+165.	Are you organised 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+166.	Are you messy? (Not tidy) 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+167.	Do other people consider you to be reliable? 
+a.	Yes 
+b.	No 
+c.	Unsure 
+d.	Prefer not to say 
+168.	Are you punctual (Not late)? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+169.	Are you discriminatory towards any groups? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+170.	How many languages do you speak? 
+a.	1 
+b.	2 
+c.	3 
+d.	4 
+e.	>4 
+f.	Prefer not to say 
+ 
+Religion 
+171.	Which religion do you conscribe to? 
+a.	Agnosticism 
+b.	Atheism 
+c.	Baha'i 
+d.	Buddhism 
+e.	Christianity 
+f.	Confucianism 
+g.	Humanism 
+h.	Hinduism 
+i.	Islam 
+j.	Jainism 
+k.	Judaism 
+l.	Nihilism 
+m.	Shinto 
+n.	Sikhism 
+o.	Taoism 
+p.	Zoroastrianism 
+q.	Prefer not to say 
+r.	Other 
+172.	Do you believe in ghosts? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+173.	Do you believe in fairies? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+174.	Do you believe in aliens? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+Hobbies 
+175.	How frequently do you go to the bar? 
+a.	Every week 
+b.	Every month 
+c.	Every few months 
+d.	Even Less 
+e.	Prefer not to say 
+f.	Other 
+176.	How frequently do you go to the club? 
+a.	Every week 
+b.	Every month 
+c.	Every few months 
+d.	Even Less 
+e.	Prefer not to say 
+f.	Other 
+177.	Do you like watching football? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+178.	Do you play any sports? 
+a.	Yes 
+b.	No 
+c.	Prefer not to say 
+d.	Other 
+179.	Do you like horses? 🥺 
+a.	Yes 
+b.	No 
+c.	Don't care  
+d.	Prefer not to say 
+180.	What's your opinion on gaming? 
+a.	Good, I do it all the time/ am fine with my partner doing it 
+b.	Great, do it with my partner 
+c.	Unbothered 
+d.	Fine as long as they get their work done 
+e.	Rather my partner didn't 
+f.	Completely against it 
+g.	Prefer not to say 
+h.	Other 
+ 
+ 
+ 
+ 
+Additional Information 
+181.	Field of occupancy: 
+ 
+182.	Place of primary residence: 
+ 
+183.	Mental disorders: 
+ 
+184.	Favourite Food: 
+ 
+185.	Hobbies: 
+ 
+186.	What biscuit would you be and why? 
+ 
+187.	Personal Description: (5,000 characters max) ** Publicly Viewable On Profile ** 
+ 
+188.	Describe a hobby of yours or a topic of interest (5,000 characters max) 
+ 
+189.	References: (I.e from friends, exes, etc) 
+ 
+190.	Play any instruments? 
+ 
+191.	Political Party Voting Patterns (All previous votes) 
+ 
+192.	Career Aspirations 
+ 
+193.	Physical disabilities 
+ 
+194.	Previous procedures (i.e. appendix removal, tonsilitis, etc)  
+ 
+195.	Place of birth 
+ 
+196.	Favourite bands 
+ 
+197.	Favourite genres of music 
+ 
+198.	Any dislikes for music genres or artists 
+ 
+199.	5 words that sum you up as a person 
+ 
+200.	Fashion sense – examples, style, etc (Qualitative only) 
+ 
+201.	Best jokes 
+ 
+202.	Best pickup lines 
+ 
+203.	What are your favourite flowers? 
+ 
+204.	What topics would you find interesting to discuss in conversation? 
+ 
+205.	What are your best conversation starting lines? 
+ Honorary Mentions: 
+386.	Opinion on no-recording in gyms 
+387.	Opinion on segregated gyms – male only, female only and mixed gyms 
+388.	Should pepper spray and tasers be legal? 
+389.	Should training be required for pepper spray or taser ownership? 
+390.	Should self-defense be mandatory in school? 
+391.	For ketchup on chips, do you put a single spot of ketchup and dip your chips or pour it on in a criss-cross pattern? 
+392.	Favourite movie genre 
+393.	Opinion on shaking hands with a superior 
+394.	Opinion on minimum wage – higher/lower/shouldn't exist etc 
+395.	Should health insurance (NHS) be tanked by tax payers or paid for privately? 
+396.	Should government support exist? 
+397.	Should England be a two – party consent state? (Currently single) 
+398.	If cancer could be cured, should it be? 
+399.	If you could cure cancer, would you? 
+400.	How much cuddle time is reasonable to expect in a relationship? 
+401.	Should the government be allowed to make decisions without majority voting rule? 
+402.	How much would you expect your partner to tip whilst on a date? 
+403.	Should guns be illegal, in your humble opinion? 
+404.	Is protesting using intimidation acceptable? 
+405.	Should patents have no time limit? (i.e. never expire) 
+406.	Do you think that puberty blockers should be legal for children under age (such as under 5 etc) 
+407.	Do you agree with equal rights, equal fights? 
+408.	Do you think that cheating is ever acceptable? 
+409.	If you were warned that the purge was going to occur in the next 24 hours, what would you do to prepare? 
+410.	If you could be born again, would you be born as a different sex? 
+411.	Would your partner being a worm change how you feel about them? 
+412.	If you could have one superpower, what would it be? (Obviously not allowing ability to create abilities etc etc) 
+413.	Do you think that sports should remain segregated by sex? I.e. football is male vs male, running, long jump etc is male vs male or female vs female etc. 
+414.	Do you think that respect is underrated? (Historically respect meant everything, now it's overlooked and considered irrelevant) 
+415.	Is lying to someone to get something from them (such as sex, dating, money, etc) unethical? Should it be illegal? 
+416.	Should the army have conscription policies? (force people to sign up) 
+417.	Is it cheating to find someone else attractive whilst you're in a relationship? 
+418.	After you've moved in with your partner(s), is it ethically or socially wrong to not sleep in the same bed as them? 
+419.	What's your opinion on Roma? 
+420.	Is it unethical to arrest a child if they are diagnosed as being a clinical psychopath in order to protect society? 
+421.	Opinions on trespass – should it be legal? 
+422.	How many layers are required for a wedding cake? (Below 4 is just unacceptable) 
+423.	Have you done DofE? If so, to what level? 
+424.	How many hours of volunteering do you currently have to your name? 
+425.	If you had to give up either Instagram/TikTok/Social media or your partner, which would you give up and why? 
+426.	Do you sleep with any teddies? 
+427.	Do you believe in life after death/ reincarnation? 
+428.	Do you believe in Karma? 
+429.	Mental IQ 
+430.	If you didn't have work/school tomorrow, what would you do? 
+431.	What's something that you have recently done that you are proud of? 
+432.	When was the last time that you cried? Why? 
+433.	What is something that you would never do if you have a relatively infinite amount of money? 
+434.	What's a movie that you can and would watch over and over again? 
+435.	What's something that you must always have in your cupboard and/or fridge? 
+436.	What snack or meal would you never turn down? 
+437.	If there was a zombie apocalypse, what would you do to survive? 
+438.	What's the weirdest thing that you carry on your person/ purse? 
+439.	When was the last time that you went skinny dipping? 
+440.	Would you date someone just for their looks? 
+441.	What was the last crazy thing that you did? Why did you do it? 
+442.	Who would you rather has a roommate, goat or pig? 
+443.	If you were given an order to assassinate someone you dislike, how you do it? 
+444.	If you're friends and family were all arrested, what do you think they did to deserve it? 
+445.	You and all your friends enter a hunger games scenario, would you win? 
+446.	Would you prefer to date someone rich and ugly or poor but attractive? 
+447.	Would you rather win £500,000 or let your best friend win £5,000,000? 
+448.	Would you rather let 1,000 bees sting you on stomp on a kitten? D: 
+449.	Your father and boyfriend/ mother and girlfriend switch bodies. The only way to switch them back is to have sex with them, lights turned on, sober and fully conscious. Who do you have sex with? 
+450.	What's a good book that you would recommend to everyone? 
+451.	Would you rather travel to the future or the past, (for 24 hours) 
+452.	If you could travel in the TARDIS, on the condition that you can never talk to your family or friends ever again, would you? 
+453.	What's the first thing you do when you get back from work? 
+454.	What's the first thing that you do when you get up in the morning? 
+455.	If you could ask your pet 3 questions and get their honest answers, what would you ask them? 
+456.	What's something you would like people to remember you for? 
+457.	What's the most romantic thing you've ever done for someone? 
+458.	If you were the president of your city, what rule would you enforce the most? 
+459.	What's your most and least favourite household chore? 
+460.	What's something that you've always wanted to do but haven't done? Why haven't you done it? 
+461.	If you could retire right now, would you continue working? 
+462.	What does your perfect weekend look like? Are you alone, watching movies, with friends? 
+463.	If you had the chance to change one thing about your upbringing, what would it be and why? 
+464.	What's something that gives your life meaning? 
+465.	If you could give your younger self one piece of advice, what would it be? 
+466.	What do you wish you didn't care so much about? 
+467.	What's your nickname from your friends and your family? 
+468.	Where would you go if you needed to drop off the grid? 
+469.	What's something that you swear by? 
+470.	Would you rather have flight or invisibility as your super power? 
+471.	Do you wear slippers or socks around the house? 
+472.	Do you prefer peanut butter or Nutella? 
+473.	Do you prefer baths or showers? For what purpose? (eg bath for relaxing, shower for day-to-day) 
+474.	What physical act gives you the most pleasure? 
+475.	Do you prefer firm or light touches from your partner/loved ones? 
+476.	Would you rather give or receive oral? 
+477.	Do you enjoy roleplay? 
+478.	Have you ever had sex with someone on a first date? 
+479.	What's the dirtiest thought that you've ever had about a stranger? 
+480.	Would you ever do a threesome? 
+481.	What do you think about the use of toys for a sexual context? 
+482.	Where do you like to be touched the most? 
+483.	What's your favourite way to be seduced? 
+484.	What do you enjoy most about being single? 
+485.	What do you find most attractive in a partner? (eg abs) 
+486.	What does good sex mean to you? 
+487.	What are your biggest turn-offs? 
+488.	Do you prefer cuddling or kissing? 
+489.	What do you wear when you go to sleep? 
+490.	Would you like to be famous? If so, in what way and for what reason? 
+491.	Before making a phone call, do you rehearse what you're going to say? 
+492.	Do you have a hunch about how you're going to die? Why? 
+493.	For what in life are you most grateful? 
+494.	If you could awaken tomorrow having gained one quality, what would it be? 
+495.	If you could find out the truth about your entire life from this point onwards, would you? 
+496.	What does friendship mean to you? 
+497.	What's your worst memory? 
+498.	Do you listen to music/watch videos in public without headphones?
+499.	Would you date long distance?
+500.	If you could only keep one parent alive, and watch the other die, who would you rather live?
+501.	Opinion on makeup – is it catfishing? Should it even be allowed in beauty contests?
+502.	Opinion on cost of wedding dresses: (Worth it? Budget?)
+503.	How much would you spend on a wedding/engagement ring?
+504.	How many different outfits do you have? (Number of possible combinations)
+505.	How many pairs of shoes do you own? (Professional, practical, other)
+506.	Would you be willing to be a stay at home partner? Would you be willing to let your partner be a stay at home partner?
+507.	Are you interested in being in the medical field? Nurse, doctor, etc
+508.	List all your Instagram comments from your most recent post. (Post of yourself, or a photo in which you feature. Write N/A if not applicable.)
+509.	How many followers do you have on Tiktok?
+510.	How many followers do you have on Instagram?
+511.	What's your snapscore?
+512.	How often do you get your nails done?
+513.	How often do you go to the spa?
+514.	How many pairs of shoes do you own?
+515.	What are your cheapest shoes for? 
+516.	Brand name of your shoes
+517.	Brands of your clothes
+518.	Do you use Proxies / VPNs?
+519.	Do you play Roblox? 🥺
+520.	Do you think that brain implants that allow people to "enhance" their intellectual capabilities should be legal?
+
+ 
+Assess hard-working by how many attempts are taken to complete this form, time taken, etc 
+ 
