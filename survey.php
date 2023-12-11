@@ -18,16 +18,20 @@ if ( mysqli_connect_errno() ) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT Question_ID, Question_Number, Question_Section_Letter, fk_Question_Group_ID, Response_Type FROM questions_tb WHERE fk_Question_Group_ID = ?')) {
-    // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
-    $stmt->bind_param('s', $_POST['survey']);
+if ($stmt = $con->prepare('SELECT Question_ID, Question_Number, Question_Section_Letter, Response_Type, Question_Text FROM questions_tb WHERE fk_Question_Group_ID = ?')) {
+    // Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
+    $stmt->bind_param('i', $_POST['survey']);
     $stmt->execute();
-    // Store the result so we can check if the account exists in the database.
-    $stmt->store_result();
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($q_num, $q_letter, $resp_type);
-        $stmt->fetch();
-    }
+	$result = $stmt->get_result();
+	echo $result->num_rows;
+    if ($result->num_rows > 0) {
+        //$stmt->bind_result($q_ID, $q_num, $q_letter, $resp_type, $q_text);
+		$quesArr = array();
+		foreach ($result as $question){
+			$quesArr[] = $question;
+		}
+	}
+        
 }
 session_regenerate_id();
 $_SESSION['survey_ID'] = $_POST['survey'];
@@ -63,18 +67,43 @@ $_SESSION['survey_ID'] = $_POST['survey'];
                 <input type="text" id="lname" name="lname"><br><br>
 
                 <!-- Iterates through all questions -->
-                <?php
-				if ($stmt = $con->prepare('SELECT Question_ID, Question_Number, Question_Section_Letter, Response_Type FROM questions_tb WHERE fk_Question_Group_ID = ?')) {
-                    $stmt->bind_param('i', $_SESSION['survey_ID']);
-					$stmt->execute();
-				
-				$result = $stmt->get_result();
-				foreach ($result as $row){
-                    echo $row;
-                }
-                    //<!-- Iterates through all answers -->
-            }
-                ?>
+                
+				<?php
+				// Iterates through the array quesArr to find each question
+				foreach ($quesArr as $question){
+					// Split up the components of that question :)
+					$q_text = $question["Question_Text"];
+					$q_letter = $question["Question_Section_Letter"];
+					$resp_type = $question["Response_Type"];
+					$q_num = $question["Question_Number"];
+					$q_ID = $question["Question_ID"];
+					// If this is a new question
+					if ($q_letter == null){
+						?>
+						<?php 
+						// If this is not the first question, the form needs to be closed
+						if ($q_num > 1){
+							?> </form> <?php
+						}
+						?>
+						
+						<!-- Writes what the question is above the new form -->
+						<p><?php echo $q_text?></p>
+						<form>
+						<?php
+					}else{// Otherwise this is a response
+						?>
+						<!-- Creates the appropraite response type for each response and adds them to the form -->
+						<input type="<?php echo $resp_type?>" id="<?php echo $q_ID?>" name="<?php echo $q_num?>" value="<?php echo $q_text?>">
+						<!-- Adds a label to tell the user what each box represents -->
+						<label for="<?php echo $q_ID?>"> <?php echo $q_text?> </label><br>
+						<?php
+					}
+
+				}
+				// Now all the forms are complete, the final form needs to be closed
+				?>
+				</form>
                 <!-- Submit Button -->
                 <input type="submit" value="Submit">
 		</div>
