@@ -6,7 +6,10 @@ $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
 $DATABASE_NAME = 'fusion_flirt_db';
-// Try and connect using the info above.
+// Try and connect using the info above.			
+$fname = $_POST["firstname"];
+$sname = $_POST["surname"];
+$dob = $_POST["dob"];
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if (mysqli_connect_errno()) {
 	// If there is an error with the connection, stop the script and display the error.
@@ -60,11 +63,21 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 			$stmt = $con->prepare('SELECT user_ID FROM users_tb WHERE username = ?');
 			$stmt->bind_param('i', $_POST['username']);
 			$stmt->execute();
-			$stmt->bind_result($user_ID);
-			$stmt->fetch();
-			$stmt->close();
+			//$stmt->bind_result($user_ID);
+			//$stmt->fetch();
+			//$stmt->close();
+			$result = $stmt->get_result();
+			foreach ($result as $user){
+				$user_ID = $user['user_ID'];
+			}
 			// Store the user's ID
 			$_SESSION["id"] = $user_ID;
+
+			echo $_POST['dob'];
+			
+			?><br><?php
+			echo $user_ID;
+
 			
 			// Add the activation code
 			$stmt = $con->prepare('INSERT INTO authentication_tb (fk_user_ID, activation_code) VALUES (?, ?)');
@@ -72,15 +85,13 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 			$stmt->execute();
 			$stmt->close();
 
-			
 			// Add the user's email
-			$stmt = $con->prepare('INSERT INTO contact_details_tb (emailAddress) VALUES (?)');
-			$stmt->bind_param('s', $_POST['email']);
+			$stmt = $con->prepare('INSERT INTO contact_details_tb (emailAddress, phoneNumber) VALUES (?)');
+			$stmt->bind_param('si', $_POST['email'], $_POST['phone_number']);
 			$stmt->execute();
 			$stmt->close();
 			// Add the user's contact ID to the users table
 			// Find the contact ID
-			$user_ID = 0;
 			$stmt = $con->prepare('SELECT contact_ID FROM contact_details_tb WHERE emailAddress = ?');
 			$stmt->bind_param('s', $_POST['email']);
 			$stmt->execute();
@@ -88,9 +99,9 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 			$stmt->fetch();
 			$stmt->close();
 			
-			// Add the ID to the users details
-			$stmt = $con->prepare('UPDATE users_tb SET fk_contact_ID = ? WHERE user_ID = ?');
-			$stmt->bind_param('ii', $contact_ID, $user_ID);
+			// Add the ID and user's name and dob to the users details
+			$stmt = $con->prepare('UPDATE users_tb SET fk_contact_ID = ?, firstname = ?, surname = ?, dateOfBirth = ? WHERE user_ID = ?');
+			$stmt->bind_param('isssi', $contact_ID, $fname, $sname, $dob, $user_ID);
 			$stmt->execute();
 			$stmt->close();
 

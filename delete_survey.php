@@ -1,11 +1,19 @@
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
+// Change this to your connection info.
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'fusion_flirt_db';
+// Try and connect using the info above.
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+session_regenerate_id();
 ?>
 
 <!DOCTYPE html>
@@ -24,14 +32,32 @@ if (!isset($_SESSION['loggedin'])) {
 				<a href="surveys_page.php">Surveys Page</a>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-				<a href="showprofile.php"></i>Testing</a>
 			</div>
 		</nav>
 		<div class="content">
 			<h2>Home Page</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 			<p>Ello!</p>
-			<p>Para</p>
+			<p>
+									
+			</p>
+	
+			</form>
 		</div>
 	</body>
+
+    
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST['delete'])) {
+            $surveyID = $_POST['delete'];
+    
+            echo "Deleting Survey with ID: " . $surveyID;
+        } else {
+            // Handle other form elements or show an error message.
+            echo "Invalid request.";
+        }
+    }
+    ?>
+
 </html>

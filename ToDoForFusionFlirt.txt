@@ -1,0 +1,15 @@
+SignUp
+----------
+- If account already created AND verifiied, log in
+- Once created and verified, login
+- On verify page, allow login
+- On verify page, says not verified even if verified :c
+
+
+
+
+
+Save Responses
+------------------
+- add answer_ID to users_Response_tb ONLY IF Selected
+	- If an answer_ID is NOT linked to a user_ID, then the user did NOT select it

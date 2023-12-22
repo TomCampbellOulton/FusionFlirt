@@ -5,7 +5,7 @@ session_start();
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'dating_app_db';
+$DATABASE_NAME = 'fusion_flirt_db';
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 // If the user is not logged in redirect to the login page...
@@ -38,14 +38,28 @@ session_regenerate_id();
 			<h2>Home Page</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 			<p>Ello!</p>
+			<p>
+				For Admins Only!!
+				Change/add/remove questions!
+				<form action="select_survey_to_edit.php" method="post">
+				<button name="select_survey_to_edit" type="submit" value="ello"> 
+					<!-- Text written here goes INSIDE the buttons box-->
+					Select A Survey To Alter
+				</button>
+				</form>
+					
+			</p>
 			<form action="survey.php" method="post">
 				<?php
-				if ($stmt = $con->prepare('SELECT Question_Group_ID, Question_Group FROM question_groups_tb')) {
+				if ($stmt = $con->prepare('SELECT survey_ID, surveyTopic FROM survey_tb')) {
 					$stmt->execute();
 				
-				$result = $stmt->get_result();
-				foreach ($result as $row){
-					?><button name="survey" type="submit" value="<?php echo $row['Question_Group_ID'] ?>"> <?php echo $row['Question_Group'] ?> </button><?php 
+					$result = $stmt->get_result();
+					foreach ($result as $row){
+					?><button name="survey" type="submit" value="<?php echo $row['survey_ID'] ?>"> 
+					<?php echo $row['surveyTopic'] ?> 
+					</button>
+					<?php
 					}
 				}?>
 			</form>
