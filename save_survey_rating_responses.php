@@ -58,23 +58,23 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 				// EITHER, the responses will be in ranges OR as a single value out of 7
                 if (str_contains($key, "rating-") && $value !== ""){
                     echo "Question ID ".trim($key, "rating-")." With Value ".$value.";";
-                    $q_ID = intval(trim($key, "rating-"));
-                    $radio_inputs[$q_ID] = $value;
+                    $ans_ID = intval(trim($key, "rating-"));
+                    $radio_inputs[$ans_ID] = $value;
 
                 }else if (str_contains($key, "lower_bound-") && $value !== ""){
                     echo "Question ID ".trim($key, "lower_bound-")." With Value ".$value.";";
-                    $q_ID = intval(trim($key, "lower_bound-"));
-                    $range_inputs[$q_ID]["lower_bound"] = $value;
+                    $ans_ID = intval(trim($key, "lower_bound-"));
+                    $range_inputs[$ans_ID]["lower_bound"] = $value;
                     
                 }else if (str_contains($key, "median_bound-") && $value !== ""){
                     echo "Question ID ".trim($key, "median_bound-")." With Value ".$value.";";
-                    $q_ID = intval(trim($key, "median_bound-"));
-                    $range_inputs[$q_ID]["median_bound"] = $value;
+                    $ans_ID = intval(trim($key, "median_bound-"));
+                    $range_inputs[$ans_ID]["median_bound"] = $value;
 
                 }else if (str_contains($key, "upper_bound-") && $value !== ""){
                     echo "Question ID ".trim($key, "upper_bound-")." With Value ".$value.";";
-                    $q_ID = intval(trim($key, "upper_bound-"));
-                    $range_inputs[$q_ID]["upper_bound"] = $value;
+                    $ans_ID = intval(trim($key, "upper_bound-"));
+                    $range_inputs[$ans_ID]["upper_bound"] = $value;
 
                 }else {
                     echo "An error has occurred";
@@ -82,21 +82,48 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 				
         }
         // Access data from $radio_inputs
-        foreach ($radio_inputs as $q_ID => $value) {
-            echo "Radio Input - Question ID: $q_ID, Value: $value<br>";
-            $stmt = $con->prepare('INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (?, ?, ?)');
-            $stmt->bind_param('iii', $user_ID, $q_ID, $value);
-            $stmt->execute();
-            $stmt->close();
+        foreach ($radio_inputs as $a_ID => $value) {
+            // Check if the user has already rated that answer or not
+            $stmt = $con->prepare('SELECT response_ID FROM users_wants_radio_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+			$stmt->bind_param('ii', $user_ID, $a_ID);
+            echo "<br>User ID - ".$user_ID." - Answer ID - ".$a_ID;
+			$stmt->execute();
+            $stmt->store_result();    
+            echo "<br>Number of rows - ".$stmt->num_rows();
+			// If the user has already responded
+			if ($stmt->num_rows() > 0) {
+                $stmt->close();
+                $stmt = $con->prepare('UPDATE users_wants_radio_tb SET answer_rating = ? WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+                $stmt->bind_param('iii',$value, $user_ID, $a_ID);
+                $stmt->execute();
+                $stmt->close();
+            }else{
+                $stmt->close();
+                $stmt = $con->prepare('INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (?, ?, ?)');
+                $stmt->bind_param('iii', $user_ID, $a_ID, $value);
+                $stmt->execute();
+                $stmt->close();
+            }
         }
 
         // Access data from $range_inputs
-        foreach ($range_inputs as $q_ID => $range_data) {
-            echo "Range Input - Question ID: $q_ID, Lower Bound: " . $range_data['lower_bound'] . ", Median Bound: " . $range_data['median_bound'] . ", Upper Bound: " . $range_data['upper_bound'] . "<br>";
-            $stmt = $con->prepare('INSERT INTO users_wants_ranges_tb (fk_user_ID, fk_answer_ID, upper_bound, lower_bound, median_bound) VALUES (?, ?, ?, ?, ?)');
-            $stmt->bind_param('iiiii', $user_ID, $q_ID, $range_data['upper_bound'], $range_data['lower_bound'], $range_data['median_bound']);
+        foreach ($range_inputs as $a_ID => $range_data) {
+            // Check if the user has already rated that answer or not
+            $stmt = $con->prepare('SELECT answer_rating FROM users_wants_ranges_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+            $stmt->bind_param('ii', $user_ID, $a_ID);
             $stmt->execute();
-            $stmt->close();
+            // If the user has already responded
+            if ($stmt->num_rows > 0) {
+                $stmt->close();
+
+            }else {
+                $stmt->close();
+                echo "Range Input - Question ID: $a_ID, Lower Bound: " . $range_data['lower_bound'] . ", Median Bound: " . $range_data['median_bound'] . ", Upper Bound: " . $range_data['upper_bound'] . "<br>";
+                $stmt = $con->prepare('INSERT INTO users_wants_ranges_tb (fk_user_ID, fk_answer_ID, upper_bound, lower_bound, median_bound) VALUES (?, ?, ?, ?, ?)');
+                $stmt->bind_param('iiiii', $user_ID, $a_ID, $range_data['upper_bound'], $range_data['lower_bound'], $range_data['median_bound']);
+                $stmt->execute();
+                $stmt->close();
+            }
         }
 			
 			

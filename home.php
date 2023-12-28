@@ -6,7 +6,18 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+$DATABASE_HOST = 'localhost';
+$DATABASE_USER = 'root';
+$DATABASE_PASS = '';
+$DATABASE_NAME = 'fusion_flirt_db';
+// Try and connect using the info above.
+$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+if ( mysqli_connect_errno() ) {
+	// If there is an error with the connection, stop the script and display the error.
+	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -25,6 +36,7 @@ if (!isset($_SESSION['loggedin'])) {
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 				<a href="showprofile.php"></i>Testing</a>
+				<a href="create_matches.php"></i>Make Me Matches Please c:</a>
 			</div>
 		</nav>
 		<div class="content">
@@ -32,6 +44,39 @@ if (!isset($_SESSION['loggedin'])) {
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 			<p>Ello!</p>
 			<p>Para</p>
+
+			<p>
+			<?php
+			// The user's ID
+			$user_ID = $_SESSION["id"];
+			// Check to see if the user has any matches
+
+			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ?');
+			$stmt->bind_param('ii', $user_ID, $user_ID);
+			$stmt->execute();
+			$stmt->bind_result($match_ID, $user1_ID, $user2_ID);
+			
+
+			$matches = array();
+			// Store all the matches in an array
+			while ($stmt->fetch()) {
+				// Process each match
+				$matches[] = array('match_ID'=>$match_ID, 'user1_ID'=>$user1_ID, 'user2_ID'=>$user2_ID);
+			}
+			$stmt->close();
+			// Checks how many matches there were
+			if (sizeof($matches) > 0){
+				foreach ($matches as $match) {
+					echo "Match ID: " . $match['match_ID'] . ", User 1 ID: " . $match['user1_ID'] . ", User 2 ID: " . $match['user2_ID'] . "<br>";
+				}
+			} else{ // There are no matches
+				echo "no matches :c";
+			}
+			
+			?>
+			</p>
 		</div>
 	</body>
+
+
 </html>

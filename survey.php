@@ -116,6 +116,8 @@ $_SESSION['survey_ID'] = $_POST['survey'];
 							<!-- Creates the appropraite response type for each response and adds them to the form -->
 							<!-- For inputs, record the "response text". Default Value will be empty -->
 							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="" name="<?php echo $q_ID?>">
+							    <!-- Add a hidden input field to include the id attribute -->
+							<input type="hidden" name="<?php echo $q_ID?>" value="<?php echo $ans_ID?>">
 							<?php
 							}
 						?>	

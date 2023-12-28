@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS  admins_tb(fk_user_ID INTEGER PRIMARY KEY, clearanceL
 CREATE TABLE IF NOT EXISTS  biography_tb(bio_ID INTEGER AUTO_INCREMENT PRIMARY KEY, bio TEXT);
 CREATE TABLE IF NOT EXISTS  photos_tb(image_ID INTEGER AUTO_INCREMENT PRIMARY KEY, image BLOB);
 CREATE TABLE IF NOT EXISTS  images_profile_link_tb(fk_image_ID INTEGER PRIMARY KEY, fk_profile_ID INTEGER, FOREIGN KEY (fk_image_ID) REFERENCES photos_tb(image_ID), FOREIGN KEY (fk_profile_ID) REFERENCES profile_tb(profile_ID));
-CREATE TABLE IF NOT EXISTS  responses_tb(response_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_answer_ID INTEGER, response TINYTEXT, FOREIGN KEY (fk_answer_ID) REFERENCES answers_tb(answer_ID));
-CREATE TABLE IF NOT EXISTS  responses_users_link_tb(fk_response_ID INTEGER, fk_user_ID INTEGER, FOREIGN KEY (fk_response_ID) REFERENCES responses_tb(response_ID), FOREIGN KEY (fk_user_ID) REFERENCES users_tb(user_ID));
+CREATE TABLE IF NOT EXISTS  responses_tb(response_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user_ID INTEGER, fk_answer_ID INTEGER, response TINYTEXT, FOREIGN KEY (fk_answer_ID) REFERENCES answers_tb(answer_ID), FOREIGN KEY (fk_user_ID) REFERENCES users_tb(user_ID));
 CREATE TABLE IF NOT EXISTS  matches_tb(match_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user1_ID INTEGER, fk_user2_ID INTEGER, user1Responded BOOLEAN, user2Responded BOOLEAN, FOREIGN KEY (fk_user1_ID) REFERENCES users_tb(user_ID), FOREIGN KEY (fk_user2_ID) REFERENCES users_tb(user_ID));
 CREATE TABLE IF NOT EXISTS  difficulty_level_tb(fk_survey_ID INTEGER PRIMARY KEY, difficultyLevel INTEGER, FOREIGN KEY (fk_survey_ID) REFERENCES survey_tb(survey_ID));
 CREATE TABLE IF NOT EXISTS  social_media_links_tb(social_media_link_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user_ID INTEGER, socialMediaLink TEXT, FOREIGN KEY (fk_user_ID) REFERENCES users_tb(user_ID));
