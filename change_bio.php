@@ -6,6 +6,7 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
@@ -17,7 +18,6 @@ if ( mysqli_connect_errno() ) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -35,48 +35,42 @@ if ( mysqli_connect_errno() ) {
 				<a href="surveys_page.php">Surveys Page</a>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-				<a href="showprofile.php"></i>Testing</a>
-				<a href="create_matches.php"></i>Make Me Matches Please c:</a>
 			</div>
 		</nav>
-		<div class="content">
-			<h2>Home Page</h2>
-			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<p>Ello!</p>
-			<p>Para</p>
+    <?php echo $_POST['users_bio'];
+    $user_ID = $_SESSION['id'];
+    $bio = $_POST['users_bio'];
+    
+    // Checks if the user already has a bio or not
+    $stmt = $con->prepare("SELECT * FROM biography_tb WHERE fk_user_ID = ?");
+    $stmt->bind_param('i', $user_ID);
+    $stmt->execute();
 
-			<p>
-			<?php
-			// The user's ID
-			$user_ID = $_SESSION["id"];
-			// Check to see if the user has any matches
+    // Get the result
+    $result = $stmt->get_result();
 
-			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ?');
-			$stmt->bind_param('ii', $user_ID, $user_ID);
-			$stmt->execute();
-			$stmt->bind_result($match_ID, $user1_ID, $user2_ID);
-			
+    // Check if any rows are returned
+    if ($result->num_rows > 0) {
+        // There is already an entry so edit that entry
+        $stmt = $con->prepare('UPDATE biography_tb  SET bio = ? WHERE fk_user_ID = ?');
+        $stmt->bind_param('si', $bio, $user_ID);
+        $stmt->execute();
+        $stmt->close();
 
-			$matches = array();
-			// Store all the matches in an array
-			while ($stmt->fetch()) {
-				// Process each match
-				$matches[] = array('match_ID'=>$match_ID, 'user1_ID'=>$user1_ID, 'user2_ID'=>$user2_ID);
-			}
-			$stmt->close();
-			// Checks how many matches there were
-			if (sizeof($matches) > 0){
-				foreach ($matches as $match) {
-					echo "Match ID: " . $match['match_ID'] . ", User 1 ID: " . $match['user1_ID'] . ", User 2 ID: " . $match['user2_ID'] . "<br>";
-				}
-			} else{ // There are no matches
-				echo "no matches :c";
-			}
-			
-			?>
-			</p>
-		</div>
-	</body>
+    }else{ // There are no entries with that User ID so make one
+        $stmt = $con->prepare('INSERT INTO biography_tb (fk_user_ID, bio) VALUES (?,?)');
+        $stmt->bind_param('is', $user_ID, $bio);
+        $stmt->execute();
+        $stmt->close();    
 
+    }
 
+    ?>
+    </body>
 </html>
+<!-- Now the Bio has been saved, return to the profile page -->
+<?php    
+header("Location: " . $_SERVER["HTTP_REFERER"]);
+exit();
+?> 
+    

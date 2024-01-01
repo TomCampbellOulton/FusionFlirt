@@ -39,30 +39,25 @@ session_regenerate_id();
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 			<p>Ello!</p>
 			<p>
-				For Admins Only!!
-				Change/add/remove questions!
-				<form action="select_survey_to_edit.php" method="post">
-				<button name="select_survey_to_edit" type="submit" value="ello"> 
-					<!-- Text written here goes INSIDE the buttons box-->
-					Select A Survey To Alter
-				</button>
-				</form>
-					
+									
 			</p>
-			<form action="survey.php" method="post">
-				<?php
-				if ($stmt = $con->prepare('SELECT survey_ID, surveyTopic FROM survey_tb')) {
-					$stmt->execute();
-				
-					$result = $stmt->get_result();
-					foreach ($result as $row){
-					?><button name="survey" type="submit" value="<?php echo $row['survey_ID'] ?>"> 
-					<?php echo $row['surveyTopic'] ?> 
-					</button>
-					<?php
-					}
-				}?>
+	
 			</form>
 		</div>
 	</body>
+
+    
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST['delete'])) {
+            $surveyID = $_POST['delete'];
+    
+            echo "Deleting Survey with ID: " . $surveyID;
+        } else {
+            // Handle other form elements or show an error message.
+            echo "Invalid request.";
+        }
+    }
+    ?>
+
 </html>

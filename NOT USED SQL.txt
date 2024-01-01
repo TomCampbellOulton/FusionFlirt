@@ -1,0 +1,129 @@
+CREATE DATABASE dating_app_db;
+USE dating_app_db;
+
+CREATE TABLE Users_tb ( 
+  User_ID INT AUTO_INCREMENT PRIMARY KEY,
+  Username TINYTEXT,
+  EMAIL TEXT,
+  Password_Hash VARCHAR(255),
+  Activation_Code VARCHAR(50) DEFAULT "",
+  Forename TINYTEXT,
+  Surname TINYTEXT,
+  Date_Of_Birth DATETIME
+);
+
+CREATE TABLE Admin_Users_tb (
+  fk_User_ID INT PRIMARY KEY,
+  Admin_Level varchar(255),
+  FOREIGN KEY(fk_User_ID) REFERENCES Users_tb(User_ID)
+);
+
+CREATE TABLE Users_social_media_tb(
+  fk_User_ID INT PRIMARY KEY,
+  Phone_Number VARCHAR(15),
+  Tiktok_Username VARCHAR(24),
+  Instagram_User VARCHAR(30),
+  Snapchat_User VARCHAR(15),
+  Website_Domain VARCHAR(2000),
+  FOREIGN KEY(fk_User_ID) REFERENCES Users_tb(User_ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Photos_tb ( 
+  Image_ID INT AUTO_INCREMENT PRIMARY KEY,
+  Image_Name varchar(255),
+  Image_Caption varchar(255),
+  Original_Format varchar(20),
+  Upload_Date DATETIME,
+  image_file BLOB
+);
+
+CREATE TABLE Question_Groups_tb (
+  Question_Group_ID INT AUTO_INCREMENT PRIMARY KEY,
+  Question_Group TEXT
+)
+
+CREATE TABLE Matches_tb ( 
+  Match_ID INT AUTO_INCREMENT PRIMARY KEY,
+  fk1_User_ID INT,
+  User_1_Matched BOOLEAN,
+  User_1_Responded BOOLEAN,
+  fk2_User_ID INT,
+  User_2_Matched BOOLEAN,
+  User_2_Responded BOOLEAN,
+  FOREIGN KEY(fk1_User_ID) REFERENCES Users_tb(User_ID) ON DELETE CASCADE,
+  FOREIGN KEY(fk2_User_ID) REFERENCES Users_tb(User_ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Users_Photos_tb ( 
+  fk_Image_ID INT PRIMARY KEY,
+  fk_User_ID INT,
+  FOREIGN KEY(fk_Image_ID) REFERENCES Photos_tb(Image_ID) ON DELETE CASCADE,
+  FOREIGN KEY(fk_User_ID) REFERENCES Users_tb(User_ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Users_Profile_tb ( 
+  fk_User_ID INT PRIMARY KEY,
+  fk_Profile_Picture INT AUTO_INCREMENT,
+  Bio TEXT,
+  Location TEXT,
+  FOREIGN KEY(fk_User_ID) REFERENCES Users_tb(User_ID) ON DELETE CASCADE,
+  FOREIGN KEY(fk_Profile_Picture) REFERENCES Photos_tb(Image_ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Questions_tb ( 
+  Question_ID INT AUTO_INCREMENT PRIMARY KEY,
+  Question_Number INT,
+  Question_Section_Letter VARCHAR(5),
+  fk_Question_Group_ID INT,
+  Response_Type TINYTEXT,
+  Question_Text TEXT,
+  FOREGIN KEY(fk_Question_Group_ID) REFERENCES question_groups_tb(Question_Group_ID)
+);
+
+CREATE TABLE Questions_Text_tb ( 
+  fk_Question_ID INT PRIMARY KEY,
+  Question_Text TEXT,
+  FOREIGN KEY(fk_Question_ID) REFERENCES Questions_tb(Question_ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Users_Response_Key_Link_tb ( 
+  Response_ID INT AUTO_INCREMENT PRIMARY KEY,
+  fk_Question_ID INT,
+  fk_User_ID INT,
+  FOREIGN KEY(fk_Question_ID) REFERENCES Questions_tb(Question_ID),
+  FOREIGN KEY(fk_User_ID) REFERENCES Users_tb(User_ID)
+);
+
+CREATE TABLE Users_Numerical_Responses_tb ( 
+  fk_Response_ID INT PRIMARY KEY,
+  Response INT,
+  FOREIGN KEY(fk_Response_ID) REFERENCES Users_Response_Key_Link_tb(Response_ID)
+);
+
+CREATE TABLE Users_Ranged_Responses_tb ( 
+  fk_Response_ID INT PRIMARY KEY,
+  Lower_Bound INT,
+  Upper_Bound INT,
+  FOREIGN KEY(fk_Response_ID) REFERENCES Users_Response_Key_Link_tb(Response_ID)
+);
+
+CREATE TABLE Users_Text_Responses_tb ( 
+  fk_Response_ID INT PRIMARY KEY,
+  Response VARCHAR(255),
+  FOREIGN KEY(fk_Response_ID) REFERENCES Users_Response_Key_Link_tb(Response_ID)
+);
+
+CREATE TABLE Users_Desired_Responses_Link_tb ( 
+  Users_Question_Response_ID INT AUTO_INCREMENT PRIMARY KEY,
+  fk_Question_ID INT,
+  fk_User_ID INT,
+  FOREIGN KEY(fk_Question_ID) REFERENCES Questions_tb(Question_ID),
+  FOREIGN KEY(fk_User_ID) REFERENCES Users_tb(User_ID)
+);
+
+CREATE TABLE Users_Desired_Responses_tb ( 
+  fk_Users_Question_Response_ID INT PRIMARY KEY,
+  Lower_Bound INT,
+  Upper_Bound INT,
+  FOREIGN KEY(fk_Users_Question_Response_ID) REFERENCES Users_Desired_Responses_Link_tb(Users_Question_Response_ID)
+);

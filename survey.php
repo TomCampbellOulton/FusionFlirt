@@ -10,7 +10,7 @@ if (!isset($_SESSION['loggedin'])) {
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
 $DATABASE_PASS = '';
-$DATABASE_NAME = 'dating_app_db';
+$DATABASE_NAME = 'fusion_flirt_db';
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if ( mysqli_connect_errno() ) {
@@ -18,21 +18,40 @@ if ( mysqli_connect_errno() ) {
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT Question_ID, Question_Number, Question_Section_Letter, Response_Type, Question_Text FROM questions_tb WHERE fk_Question_Group_ID = ?')) {
+// Get the questions
+if ($stmt = $con->prepare('SELECT question_ID, questionNumber, questionText FROM questions_tb WHERE fk_survey_ID = ?')) {
     // Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
     $stmt->bind_param('i', $_POST['survey']);
     $stmt->execute();
 	$result = $stmt->get_result();
-	echo $result->num_rows;
     if ($result->num_rows > 0) {
         //$stmt->bind_result($q_ID, $q_num, $q_letter, $resp_type, $q_text);
 		$quesArr = array();
 		foreach ($result as $question){
-			$quesArr[] = $question;
+			// Find which questions need answering
+			// Get the answers for each question
+			if ($ansStmt = $con->prepare('SELECT answer_ID, answer, questionAnswerLetter, responseType FROM answers_tb WHERE fk_question_ID = ?')) {
+				// Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
+				$ansStmt->bind_param('i', $question['question_ID']);
+				$ansStmt->execute();
+				$ansResult = $ansStmt->get_result();
+				if ($ansResult->num_rows > 0) {
+					//$stmt->bind_result($q_ID, $q_num, $q_letter, $resp_type, $q_text);
+					$ansArr = array();
+					if ($ansResult->num_rows > 0){
+						foreach ($ansResult as $answer){
+							$ansArr[] = $answer;
+						}
+					}
+				}
+					
+			}
+			$quesArr[] = array('question'=>$question,'answers'=>$ansArr);
 		}
 	}
         
 }
+
 session_regenerate_id();
 $_SESSION['survey_ID'] = $_POST['survey'];
 ?>
@@ -57,55 +76,68 @@ $_SESSION['survey_ID'] = $_POST['survey'];
 		</nav>
 		<div class="content">
 			<h2>Home Page</h2>
-            <form action="save_survey_responses.php" method="post">
-                <!-- First Input -->
-                <label for="fname">First Name:</label>
-                <input type="text" id="fname" name="fname"><br><br>
-
-                <!-- Second Input -->
-                <label for="lname">Last name:</label>
-                <input type="text" id="lname" name="lname"><br><br>
-
-                <!-- Iterates through all questions -->
-                
+			
+				<a href="rate_partner_responses.php"><i class="fas fa-sign-out-alt"></i>rate_partner_responses</a>
+				<form action="save_survey_responses.php" method="post">
 				<?php
 				// Iterates through the array quesArr to find each question
-				foreach ($quesArr as $question){
+				foreach ($quesArr as $item){
+					
+					// Split the $item into two components: question and answers
+					$question = $item['question'];
+					$answers = $item['answers'];
 					// Split up the components of that question :)
-					$q_text = $question["Question_Text"];
-					$q_letter = $question["Question_Section_Letter"];
-					$resp_type = $question["Response_Type"];
-					$q_num = $question["Question_Number"];
-					$q_ID = $question["Question_ID"];
-					// If this is a new question
-					if ($q_letter == null){
-						?>
-						<?php 
-						// If this is not the first question, the form needs to be closed
-						if ($q_num > 1){
-							?> </form> <?php
-						}
+					$q_text = $question["questionText"];
+					$q_num = $question["questionNumber"];
+					$q_ID = $question["question_ID"];
+					?>
+					<!-- Creates the fieldset within the main form for that question -->
+					<fieldset>
+
+					<!-- Writes what the question is above the new fieldset -->
+					<legend><?php echo $q_num?>. <?php echo $q_text?></legend>
+
+					<?php
+					// Write out all the answers to the question :)
+					foreach ($answers as $ans){
+						$a_text = $ans['answer'];
+						$resp_type = $ans['responseType'];
+						$ans_ID = $ans['answer_ID'];
 						?>
 						
-						<!-- Writes what the question is above the new form -->
-						<p><?php echo $q_text?></p>
-						<form>
-						<?php
-					}else{// Otherwise this is a response
-						?>
-						<!-- Creates the appropraite response type for each response and adds them to the form -->
-						<input type="<?php echo $resp_type?>" id="<?php echo $q_ID?>" name="<?php echo $q_num?>" value="<?php echo $q_text?>">
+						<!-- Checks if the response type for the input will be checkbox, radio or input -->
+						<?php 
+						if ($resp_type === "radio" or $resp_type === "checkbox"){?>
+							<!-- Creates the appropraite response type for each response and adds them to the form -->
+							<!-- For checkboxes or radio inputs, don't record the "response text" just the ID of the response -->
+							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="<?php echo $ans_ID?>" name="<?php echo $q_ID?>">
+							<?php
+						}else{?>
+							<!-- Creates the appropraite response type for each response and adds them to the form -->
+							<!-- For inputs, record the "response text". Default Value will be empty -->
+							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="" name="<?php echo $q_ID?>">
+							    <!-- Add a hidden input field to include the id attribute -->
+							<input type="hidden" name="<?php echo $q_ID?>" value="<?php echo $ans_ID?>">
+							<?php
+							}
+						?>	
 						<!-- Adds a label to tell the user what each box represents -->
-						<label for="<?php echo $q_ID?>"> <?php echo $q_text?> </label><br>
+						<label for="<?php echo $ans_ID?>"> <?php echo $a_text?> </label><br>	
 						<?php
-					}
 
+					}
+					?>
+					
+					</fieldset>
+					<?php
 				}
 				// Now all the forms are complete, the final form needs to be closed
 				?>
+			
+				<!-- Submit Button -->
+				<input type="submit" value="Submit">
 				</form>
-                <!-- Submit Button -->
-                <input type="submit" value="Submit">
+                
 		</div>
 	</body>
 </html>
