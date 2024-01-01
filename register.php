@@ -86,7 +86,7 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 			$stmt->close();
 
 			// Add the user's email
-			$stmt = $con->prepare('INSERT INTO contact_details_tb (emailAddress, phoneNumber) VALUES (?)');
+			$stmt = $con->prepare('INSERT INTO contact_details_tb (emailAddress, phoneNumber) VALUES (?, ?)');
 			$stmt->bind_param('si', $_POST['email'], $_POST['phone_number']);
 			$stmt->execute();
 			$stmt->close();
@@ -109,11 +109,11 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 
 
 
-            $from    = 'tcampbelloulton@gmail.com';
+            $from    = 'fusionflirtauthentication@gmail.com';
             $subject = 'Account Activation Required';
             $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
             // Update the activation variable below
-            $activate_link = 'http://localhost/dating_App/fusionflirtapp1.0/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+            $activate_link = 'http://localhost/dating_App/fusionflirt1.1/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
             $message = '<p>' . $_POST['password'] . 'Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a>' . $bonus . '</p>';
             mail($_POST['email'], $subject, $message, $headers);
             echo 'Please check your email to activate your account!';

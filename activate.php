@@ -40,6 +40,7 @@ if (isset($_GET['email'], $_GET['code'])) {
 			$stmt->bind_param('si', $newCode, $user_ID);
 			$stmt->execute();
 			$stmt->close();
+			echo 'The account is active! :D You can now <a href="index.html">login</a>!';
 		} else{
 			echo "<br>This code is not correct. Please try again.";
 		}
