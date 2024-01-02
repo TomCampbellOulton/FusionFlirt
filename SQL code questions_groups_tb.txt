@@ -1,3 +1,4 @@
+
 INSERT INTO question_groups_tb (Question_Group) VALUES ("Basic Info (pronouns, identity, etc) ");
 INSERT INTO question_groups_tb (Question_Group) VALUES ("Physical Attributes ");
 INSERT INTO question_groups_tb (Question_Group) VALUES ("Marriage ");
@@ -19,4 +20,3 @@ INSERT INTO question_groups_tb (Question_Group) VALUES ("Religion ");
 INSERT INTO question_groups_tb (Question_Group) VALUES ("Hobbies ");
 INSERT INTO question_groups_tb (Question_Group) VALUES ("Additional Information ");
 INSERT INTO question_groups_tb (Question_Group) VALUES (" Honorary Mentions: ");
-INSERT INTO question_groups_tb (Question_Group) VALUES ("Assess hard-working by how many attempts are taken to complete this form, time taken, etc ");

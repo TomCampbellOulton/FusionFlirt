@@ -216,8 +216,53 @@ if (sizeof($users_wants_radio) > 0){
 		}
 		if ($rejected === False){
 			echo '<br>YOU ARE A MATCH!!!';
-			// Add the match to the matches table
-			
+			// Check if they have already "matched"
+			// Assume they haven't matched yet
+			$matched = False;
+			$stmt = $con->prepare('SELECT user1Responded, user2Responded, accepted FROM matches_tb WHERE fk_user1_ID = ? AND fk_user2_ID = ?');
+			$stmt->bind_param('ii', $match, $user_ID);
+			$stmt->execute();
+			$stmt->bind_result($match_responded, $user_reponded, $accepted);
+			while ($stmt->fetch()) {
+				$matched = True;
+			}
+			// Now check to see if they have matched with the other user having initiated the matching process
+			$stmt = $con->prepare('SELECT user1Responded, user2Responded, accepted FROM matches_tb WHERE fk_user1_ID = ? AND fk_user2_ID = ?');
+			$stmt->bind_param('ii', $user_ID, $match);
+			$stmt->execute();
+			$stmt->bind_result($user_responded, $match_responded, $accepted);
+			while ($stmt->fetch()) {
+				$matched = True;
+			}
+
+			if ($matched !== True){
+				// As neither user has responded to this match yet, set it to default of False
+				$default_response = False;
+				$default_response_for_acceptance = Null;
+				// Add the match to the matches table
+				$stmt = $con->prepare('INSERT INTO matches_tb (fk_user1_ID, fk_user2_ID, user1Responded, user2Responded, accepted) VALUES (?, ?, ?, ?, ?)');
+				$stmt->bind_param('iibbb', $user_ID, $match, $default_response, $default_response, $default_response_for_acceptance);
+				$stmt->execute();
+				$stmt->close();
+			}else{
+				// Check if both of them have already responded
+				if ($user_responded === True && $match_responded === True){ // They have both responded
+					echo 'You have both already matched with this person. ';
+					// Check if they've accepted or declined
+					if ($accepted === True){
+						echo 'You have both accepted so can now communicate :D';
+					}else {
+						echo 'One of you have declined this match and are therefore incompatible. My apologies.';
+					}
+				}else{// Only one or neither has responded
+					// Check who hasn't responded yet
+					if ($user_reponded === False){// The user hasn't responded yet
+						echo '<br>You need to respond to this match please.';
+					}else{// The other person hasn't responded yet
+						echo '<br>Please be patient whilst you wait for your matches.';
+					}
+				}
+			}
 		} else{
 			echo '<br>You were rejected';
 		}
@@ -226,7 +271,8 @@ if (sizeof($users_wants_radio) > 0){
 	//print_r($possible_matches[0]);
 }
 
-
+header('Location: /dating_App/fusionflirt1.3/home.php');
+exit();
 
 
 ?>

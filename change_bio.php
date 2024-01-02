@@ -38,11 +38,13 @@ if ( mysqli_connect_errno() ) {
 			</div>
 		</nav>
     <?php echo $_POST['users_bio'];
-    $user_ID = $_SESSION['id'];
     $bio = $_POST['users_bio'];
+    $bio_ID = $_SESSION['bio_ID'];
+    $user_ID = $_SESSION['id'];
+    $profile_ID = $_SESSION['profile_ID'];
     
     // Checks if the user already has a bio or not
-    $stmt = $con->prepare("SELECT * FROM biography_tb WHERE fk_user_ID = ?");
+    $stmt = $con->prepare("SELECT * FROM biography_tb WHERE bio_ID = ?");
     $stmt->bind_param('i', $user_ID);
     $stmt->execute();
 
@@ -52,16 +54,20 @@ if ( mysqli_connect_errno() ) {
     // Check if any rows are returned
     if ($result->num_rows > 0) {
         // There is already an entry so edit that entry
-        $stmt = $con->prepare('UPDATE biography_tb  SET bio = ? WHERE fk_user_ID = ?');
-        $stmt->bind_param('si', $bio, $user_ID);
+        $stmt = $con->prepare('UPDATE biography_tb  SET bio = ? WHERE bio_ID = ?');
+        $stmt->bind_param('si', $bio, $bio_ID);
         $stmt->execute();
         $stmt->close();
+        echo '<br>trying to change the bio';
+        echo '<br>users bio - '.$bio;
+        echo '<br>users bio_ID - '.$bio_ID;
 
     }else{ // There are no entries with that User ID so make one
-        $stmt = $con->prepare('INSERT INTO biography_tb (fk_user_ID, bio) VALUES (?,?)');
-        $stmt->bind_param('is', $user_ID, $bio);
+        $stmt = $con->prepare('INSERT INTO biography_tb (bio) VALUES (?)');
+        $stmt->bind_param('s', $bio);
         $stmt->execute();
-        $stmt->close();    
+        $stmt->close();   
+        echo 'trying to add the bio';
 
     }
 
