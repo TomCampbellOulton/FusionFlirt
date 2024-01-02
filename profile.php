@@ -46,6 +46,24 @@ if ( mysqli_connect_errno() ) {
 
 	<?php
 	$user_ID = $_SESSION["id"];
+
+	// Check if the user has assembled a profile yet
+	$stmt = $con->prepare('SELECT fk_profile_ID FROM users_tb WHERE user_ID = ?');
+	$stmt->bind_param('i', $user_ID);
+	$stmt->execute();
+	$stmt->bind_result($fk_profile_ID);
+	$stmt->fetch();
+	$stmt->close();	
+	// If the user has a profile, then $fk_profile_ID won't be NULL
+	if ($fk_profile_ID === Null){// Create a profile
+		echo "noice";
+
+		// First create a biography
+		header('Location: /dating_App/fusionflirt1.3/setup_profile.php');
+		exit();
+
+	}
+
 	// Get the user's details
 	$stmt = $con->prepare('SELECT username, firstname, surname, dateOfBirth, fk_address_ID, fk_contact_ID, fk_profile_ID FROM users_tb WHERE user_ID = ?');
 	$stmt->bind_param('i', $user_ID);
@@ -62,11 +80,9 @@ if ( mysqli_connect_errno() ) {
 	$stmt->fetch();
 	$stmt->close();
 
-
-
 	// Get the user's biography
 	// To get this we first need the bio_ID
-	$stmt = $con->prepare('SELECT fk_bio_ID FROM profile_tb WHERE fk_profile_ID = ?');
+	$stmt = $con->prepare('SELECT fk_bio_ID FROM profile_tb WHERE profile_ID = ?');
 	$stmt->bind_param('i', $fk_profile_ID);
 	$stmt->execute();
 	$stmt->bind_result($bio_ID);
@@ -80,6 +96,14 @@ if ( mysqli_connect_errno() ) {
 	$stmt->fetch();
 	$stmt->close();
 
+
+
+	// Store the IDs
+	// Store the profile_ID
+	$_SESSION['profile_ID'] = $fk_profile_ID;
+	// Store the bio ID
+	$_SESSION['bio_ID'] = $bio_ID;
+
 	?>
 	<div class="content">
 		<p>Ello!</p>
@@ -87,6 +111,70 @@ if ( mysqli_connect_errno() ) {
 	<p>
 		<?php
 		echo "Username: ".$uname."<br> Firstname: ".$fname."<br> Surname: ".$sname."<br> Date Of Birth: ".$dob."<br> Address_ID: ".$fk_add_ID."<br> Contact_ID: ".$fk_cont_ID."<br> Phone Number: ".$phone_num."<br> Email: ".$email;
+		?>
+	</p>
+	<p>
+		Add some images? :)
+		<form method='POST' name='upload_images' enctype='multipart/form-data'>
+			<input type="file" name="image" />
+			<input type="submit" name="submit" value="Upload" />
+		</form>
+		<?php 
+		// Check if an image was uploaded
+		if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+			$name = $_FILES['image']['name'];
+			$type = $_FILES['image']['type'];
+			$data = file_get_contents($_FILES['image']['tmp_name']);			
+			// Insert the image into the database
+			$stmt = $con->prepare('INSERT INTO images_tb (image, image_name, image_type) VALUES (?, ?, ?)');
+			$stmt->bind_param('sss', $data, $name, $type);
+			$stmt->execute();
+			$image_ID = $con->insert_id;
+			$stmt->close();   
+
+			// Link this file to the user who uploaded it
+			$stmt = $con->prepare('INSERT INTO images_profile_link_tb (fk_image_ID, fk_profile_ID) VALUES (?, ?)');
+			$stmt->bind_param('ii', $image_ID, $fk_profile_ID);
+			$stmt->execute();
+			$stmt->close();  
+			
+
+		}
+
+		// Show the user all their images
+		$stmt = $con->prepare('SELECT fk_image_ID FROM images_profile_link_tb WHERE fk_profile_ID = ?');
+		$stmt->bind_param('i', $fk_profile_ID);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($fk_image_ID);
+		$image_IDs = ''; // Initialize the string
+
+		while ($stmt->fetch()) {
+			$image_IDs .= $fk_image_ID . ','; // Concatenate the image IDs
+		}
+		
+		if ($stmt->num_rows > 0) {
+			$stmt->close();
+		
+			// Remove the trailing comma from $image_IDs
+			$image_IDs = rtrim($image_IDs, ',');
+		
+			// Show these images
+			$stmt = $con->prepare('SELECT image, image_name, image_type FROM images_tb WHERE image_ID IN (' . $image_IDs . ')');
+			$stmt->execute();
+			$stmt->store_result();
+		
+			while ($stmt->fetch()) {
+				// For each image, display it
+				$stmt->bind_result($image, $image_name, $image_type);
+				echo '<img src="display_image.php?image_ids=' . $image_IDs . '" alt="Image">';
+			}
+		
+			$stmt->close();
+		}
+		
+
+	
 		?>
 	</p>
 	<form action="change_bio.php" method="post">

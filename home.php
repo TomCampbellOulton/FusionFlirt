@@ -61,13 +61,112 @@ if ( mysqli_connect_errno() ) {
 			// Store all the matches in an array
 			while ($stmt->fetch()) {
 				// Process each match
-				$matches[] = array('match_ID'=>$match_ID, 'user1_ID'=>$user1_ID, 'user2_ID'=>$user2_ID);
+				// Store all the matches in a stack
+
+				// Find the ID of the other user in the match
+				if ($user1_ID === $user_ID){
+					// Who the other person is
+					$matches_ID = $user2_ID;
+					// Which 'user' (1 or 2) is the user
+					$u1Or2 = 'user1';
+				}else {
+					// Who the other person is
+					$matches_ID = $user1_ID;
+					// Which 'user' (1 or 2) is the user
+					$u1Or2 = 'user2';
+				}
+
+				$matches[] = array('match_ID'=>$match_ID, 'users_ID'=>$matches_ID, 'user1OrUser2'=>$u1Or2);
 			}
 			$stmt->close();
 			// Checks how many matches there were
-			if (sizeof($matches) > 0){
-				foreach ($matches as $match) {
-					echo "Match ID: " . $match['match_ID'] . ", User 1 ID: " . $match['user1_ID'] . ", User 2 ID: " . $match['user2_ID'] . "<br>";
+			if (sizeof($matches) > 0){// If there is more than 1 match in the stack, start iterating through the stack
+				$new_match = array_pop($matches);
+				// Display this match
+				$matches_user_ID = $new_match['users_ID'];
+				echo 'users ID = '.$matches_user_ID;
+
+				// Get their profile ID and other personal details
+				$stmt = $con->prepare('SELECT username, firstname, surname, dateOfBirth, fk_contact_ID, fk_profile_ID FROM users_tb WHERE user_ID = ?');
+				$stmt->bind_param('i', $matches_user_ID);
+				$stmt->execute();
+				$stmt->bind_result($uname, $fname, $sname, $dob, $contact_ID, $profile_ID);
+				$stmt->fetch();
+				$stmt->close();
+				echo '<br>Username - '.$uname;
+				echo '<br>Firstname - '.$fname;
+				echo '<br>Surname - '.$sname;
+				echo '<br>Date Of Birth - '.$dob;
+
+				// Get their biography ID
+				$stmt = $con->prepare('SELECT fk_bio_ID FROM profile_tb WHERE profile_ID = ?');
+				$stmt->bind_param('i', $profile_ID);
+				$stmt->execute();
+				$stmt->bind_result($biography_ID);
+				$stmt->fetch();
+				$stmt->close();
+				// Get their biography
+				$stmt = $con->prepare('SELECT bio FROM biography_tb WHERE bio_ID = ?');
+				$stmt->bind_param('i', $biography_ID);
+				$stmt->execute();
+				$stmt->bind_result($biography);
+				$stmt->fetch();
+				$stmt->close();	
+				echo '<br>Biography - '.$biography;
+
+				// Get their pictures
+				
+
+				// Add the accept and reject buttons
+				?>
+				<form method='POST'>
+					<button type='submit' value='reject' name='respond'>Reject</button>
+					<button type='submit' value='accept' name='respond'>Accept</button>
+				</form>
+
+
+
+
+				<?php
+				if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
+
+					// The match ID
+					$match_ID = $new_match['match_ID'];
+
+					// If the user accepted
+					if ($_POST['respond'] === 'accept'){
+						// User 1 or 2
+						$user1Or2 = $new_match['user1OrUser2'];
+						// Responded or not
+						$responded = True;
+						// Accept=Tr or decline
+						$accept = True;
+
+						if ($user1Or2 === 'user1'){ // If it's user 1
+							$stmt = $con->prepare('UPDATE matches_tb  SET user1Responded = ?, accepted = ? WHERE fk_user1_ID = ?');
+							echo $responded, $accept, $user_ID;
+							// If the user has accepted, add this to the database
+							$stmt->bind_param('iii', $responded, $accept, $user_ID);
+							$stmt->execute();
+							$stmt->close();
+
+						}else{// Otherwise they're user 2
+							$stmt = $con->prepare('UPDATE matches_tb  SET user2Responded = ?, accepted = ? WHERE fk_user2_ID = ?');
+
+							// If the user has accepted, add this to the database
+							$stmt->bind_param('iii', $responded, $accept, $user_ID);
+							$stmt->execute();
+							$stmt->close();
+						}
+						
+					}else{ // The user declined
+						$stmt = $con->prepare('DELETE FROM matches_tb  WHERE match_ID = ?');
+
+						// If the user has accepted, add this to the database
+						$stmt->bind_param('i', $match_ID);
+						$stmt->execute();
+						$stmt->close();
+					}
 				}
 			} else{ // There are no matches
 				echo "no matches :c";
@@ -78,5 +177,18 @@ if ( mysqli_connect_errno() ) {
 		</div>
 	</body>
 
-
+	
+				<?php
+				if ($stmt = $con->prepare('SELECT survey_ID, surveyTopic FROM survey_tb')) {
+					$stmt->execute();
+				
+					$result = $stmt->get_result();
+					foreach ($result as $row){
+					?><button name="survey" type="submit" value="<?php echo $row['survey_ID'] ?>"> 
+					<?php echo $row['surveyTopic'] ?> 
+					</button>
+					<?php
+					}
+				}?>
+			</form>
 </html>

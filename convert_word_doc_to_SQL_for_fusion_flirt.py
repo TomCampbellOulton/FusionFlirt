@@ -186,7 +186,11 @@ def clean(file):
                     Response_Type = "input"
                 # Otherwise assume Radio - can be changed later
                 elif "_" not in response:
-                    Response_Type = "radio"
+                    # If there is the word "any", then the question will allow multiple responses, otherwise only one response is accepted
+                    if "any" in question.lower():
+                        Response_Type = "checkbox"
+                    else:
+                        Response_Type = "radio"
                 else:
                     input("Error D:")
 

@@ -138,7 +138,7 @@ def clean(file):
         # Group ID counter - increases once per group completed
         Group_ID = 1
         
-        response_string2 = f"INSERT INTO question_groups_tb (Question_Group) VALUES (\"{title}\");\n"
+        response_string2 = f"\nINSERT INTO question_groups_tb (Question_Group) VALUES (\"{title}\");"
         SQL_Command_Groups += response_string2
         for question in clean_data[title]:
             # Format of SQL table
@@ -151,7 +151,7 @@ def clean(file):
             text = "".join(question[1:])
 
             # Insert the actual question into the table
-            response_string = f"INSERT INTO questions_tb (Question_Number,fk_Question_Group_ID,Question_Text) VALUES {Q_Num,Group_ID,text};\n"
+            response_string = f"\nINSERT INTO questions_tb (Question_Number,fk_Question_Group_ID,Question_Text) VALUES {Q_Num,Group_ID,text};"
             SQL_Command += response_string
             
 
@@ -177,7 +177,11 @@ def clean(file):
                     Response_Type = "input"
                 # Otherwise assume Radio - can be changed later
                 elif "_" not in response:
-                    Response_Type = "radio"
+                    # If there is the word "any", then the question will allow multiple responses, otherwise only one response is accepted
+                    if "any" in response.lower():
+                        Response_Type = "checkbox"
+                    else:
+                        Response_Type = "radio"
                 else:
                     input()
 

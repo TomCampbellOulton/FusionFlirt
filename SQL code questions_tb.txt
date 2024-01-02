@@ -10,8 +10,8 @@ INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES ('Socioeconomic cla
 INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES ('Star sign ', 1);
 INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES ('Spirit Animal: (https://wwwwcsorg/wildcards/posts/what-is-your-spiritanimal?gclid=CjwKCAjwiOCgBhAgEiwAjv5whKnoP4_SjoNEzWLSK62UXE7EUqNzrcFr9PhSXs7TLTOZ9XZR65lrrhoCycIQAvD_BwE) ', 1);
 INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES ('Birth crystal ', 1);
-INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES (' Any criminal history? ', 1);
-INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES (' Allergies ', 1);
+INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES (' Do you have any criminal history? ', 1);
+INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES (' Do you have any allergies?', 1);
 INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES (' Any pets? ', 1);
 INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES ('Life expectancy: ', 2);
 INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES ('How many piercings do you have? ', 2);
