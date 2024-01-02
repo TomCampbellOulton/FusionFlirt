@@ -56,11 +56,10 @@ while ($stmt->fetch()){
 	// Make sure the possible match isn't themself as they can't match with themself
 	if ($all_user_IDs !== $user_ID){
 		$possible_matches[] = $all_user_IDs;
-		$rating_of_possible_matches['$all_user_IDs'] = array(0,0,0,0,0,0,0);// Number of times meeting the ratings 1-7
+		$rating_of_possible_matches[$all_user_IDs] = array(0,0,0,0,0,0,0);// Number of times meeting the ratings 1-7
 	}
 }
 $stmt->close();
-
 // Start off with the radio inputs
 // Checks how many there are 
 $user_scores = array();
@@ -216,6 +215,15 @@ if (sizeof($users_wants_radio) > 0){
 		}
 		if ($rejected === False){
 			echo '<br>YOU ARE A MATCH!!!';
+			$score = 0;
+			// Calculate their score
+			// Weight 0 as -3, 1=-2, 2=-1, 3=0, 4=1, 5=2, 6=3
+			$score = $rating_of_possible_matches[$match][0]*-3 + $rating_of_possible_matches[$match][1]*-2 + $rating_of_possible_matches[$match][2]*-1 + $rating_of_possible_matches[$match][4]*1 + $rating_of_possible_matches[$match][5]*2 + $rating_of_possible_matches[$match][6]*3;
+			$score = $score + $users_rating[0]*-3 + $users_rating[1]*-2 + $users_rating[2]*-1 + $users_rating[4]*1 + $users_rating[5]*2 + $users_rating[6]*3;
+			
+
+
+
 			// Check if they have already "matched"
 			// Assume they haven't matched yet
 			$matched = False;
@@ -240,8 +248,8 @@ if (sizeof($users_wants_radio) > 0){
 				$default_response = False;
 				$default_response_for_acceptance = Null;
 				// Add the match to the matches table
-				$stmt = $con->prepare('INSERT INTO matches_tb (fk_user1_ID, fk_user2_ID, user1Responded, user2Responded, accepted) VALUES (?, ?, ?, ?, ?)');
-				$stmt->bind_param('iibbb', $user_ID, $match, $default_response, $default_response, $default_response_for_acceptance);
+				$stmt = $con->prepare('INSERT INTO matches_tb (fk_user1_ID, fk_user2_ID, user1Responded, user2Responded, accepted, score) VALUES (?, ?, ?, ?, ?, ?)');
+				$stmt->bind_param('iibbb', $user_ID, $match, $default_response, $default_response, $default_response_for_acceptance, $score);
 				$stmt->execute();
 				$stmt->close();
 			}else{
@@ -271,7 +279,8 @@ if (sizeof($users_wants_radio) > 0){
 	//print_r($possible_matches[0]);
 }
 
-header('Location: /dating_App/fusionflirt1.3/home.php');
+
+header('Location: /dating_App/fusionflirt1.4/home.php');
 exit();
 
 

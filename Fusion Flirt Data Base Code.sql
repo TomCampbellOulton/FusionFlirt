@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS  images_tb(image_ID INTEGER AUTO_INCREMENT PRIMARY KE
 -- Create a table to link the user's photos to their profile
 CREATE TABLE IF NOT EXISTS  images_profile_link_tb(fk_image_ID INTEGER PRIMARY KEY, fk_profile_ID INTEGER, FOREIGN KEY (fk_image_ID) REFERENCES images_tb(image_ID) ON DELETE CASCADE, FOREIGN KEY (fk_profile_ID) REFERENCES profile_tb(profile_ID) ON DELETE CASCADE);
 -- Create a table to store all the suitable matches found in the database
-CREATE TABLE IF NOT EXISTS  matches_tb(match_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user1_ID INTEGER, fk_user2_ID INTEGER, user1Responded BOOLEAN DEFAULT False, user2Responded BOOLEAN DEFAULT False, accepted BOOLEAN DEFAULT NULL, FOREIGN KEY (fk_user1_ID) REFERENCES users_tb(user_ID) ON DELETE CASCADE, FOREIGN KEY (fk_user2_ID) REFERENCES users_tb(user_ID) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS  matches_tb(match_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user1_ID INTEGER, fk_user2_ID INTEGER, user1Responded BOOLEAN DEFAULT False, user2Responded BOOLEAN DEFAULT False, accepted BOOLEAN DEFAULT NULL, score INTEGER DEFAULT 0, FOREIGN KEY (fk_user1_ID) REFERENCES users_tb(user_ID) ON DELETE CASCADE, FOREIGN KEY (fk_user2_ID) REFERENCES users_tb(user_ID) ON DELETE CASCADE);
 -- Create a table to link the user's social media pages to their profiles
 CREATE TABLE IF NOT EXISTS  social_media_links_tb(social_media_link_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_profile_ID INTEGER, socialMediaLink TEXT, FOREIGN KEY (fk_profile_ID) REFERENCES profile_tb(profile_ID));
 -- Create a table to authenticate each users new accounts
