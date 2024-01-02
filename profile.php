@@ -47,10 +47,10 @@ if ( mysqli_connect_errno() ) {
 	<?php
 	$user_ID = $_SESSION["id"];
 	// Get the user's details
-	$stmt = $con->prepare('SELECT username, firstname, surname, dateOfBirth, fk_address_ID, fk_contact_ID FROM users_tb WHERE user_ID = ?');
+	$stmt = $con->prepare('SELECT username, firstname, surname, dateOfBirth, fk_address_ID, fk_contact_ID, fk_profile_ID FROM users_tb WHERE user_ID = ?');
 	$stmt->bind_param('i', $user_ID);
 	$stmt->execute();
-	$stmt->bind_result($uname, $fname, $sname, $dob, $fk_add_ID, $fk_cont_ID);
+	$stmt->bind_result($uname, $fname, $sname, $dob, $fk_add_ID, $fk_cont_ID, $fk_profile_ID);
 	$stmt->fetch();
 	$stmt->close();	
 
@@ -62,9 +62,19 @@ if ( mysqli_connect_errno() ) {
 	$stmt->fetch();
 	$stmt->close();
 
+
+
 	// Get the user's biography
-	$stmt = $con->prepare('SELECT bio FROM biography_tb WHERE fk_user_ID = ?');
-	$stmt->bind_param('i', $user_ID);
+	// To get this we first need the bio_ID
+	$stmt = $con->prepare('SELECT fk_bio_ID FROM profile_tb WHERE fk_profile_ID = ?');
+	$stmt->bind_param('i', $fk_profile_ID);
+	$stmt->execute();
+	$stmt->bind_result($bio_ID);
+	$stmt->fetch();
+	$stmt->close();
+	// Now get the biography
+	$stmt = $con->prepare('SELECT bio FROM biography_tb WHERE bio_ID = ?');
+	$stmt->bind_param('i', $bio_ID);
 	$stmt->execute();
 	$stmt->bind_result($bio);
 	$stmt->fetch();

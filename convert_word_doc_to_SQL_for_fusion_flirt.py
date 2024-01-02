@@ -160,7 +160,7 @@ def clean(file):
             text = "".join(Q_List[1:])
 
             # Insert the actual question into the table
-            questions_string = f"INSERT INTO questions_tb (questionNumber, questionText, fk_survey_ID) VALUES {Q_Num,text,Group_ID};\n"
+            questions_string = f"INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES {text,Group_ID};\n"
             SQL_Command += questions_string
             
 
