@@ -51,7 +51,7 @@ if ( mysqli_connect_errno() ) {
 			$user_ID = $_SESSION["id"];
 			// Check to see if the user has any matches
 
-			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ?');
+			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ? ORDER BY score ASC');
 			$stmt->bind_param('ii', $user_ID, $user_ID);
 			$stmt->execute();
 			$stmt->bind_result($match_ID, $user1_ID, $user2_ID);
