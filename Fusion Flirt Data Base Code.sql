@@ -30,6 +30,15 @@ CREATE TABLE IF NOT EXISTS  matches_tb(match_ID INTEGER AUTO_INCREMENT PRIMARY K
 CREATE TABLE IF NOT EXISTS  social_media_links_tb(social_media_link_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_profile_ID INTEGER, socialMediaLink TEXT, FOREIGN KEY (fk_profile_ID) REFERENCES profile_tb(profile_ID));
 -- Create a table to authenticate each users new accounts
 CREATE TABLE IF NOT EXISTS authentication_tb(fk_user_ID INTEGER PRIMARY KEY, activation_code VARCHAR(255), FOREIGN KEY (fk_user_ID) REFERENCES users_tb(user_ID));
+-- Create a table to link the users to these messages
+CREATE TABLE IF NOT EXISTS message_groups_tb (group_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user1_ID INTEGER, fk_user2_ID INTEGER, FOREIGN KEY (fk_user1_ID) REFERENCES users_tb (user_ID) ON DELETE CASCADE, FOREIGN KEY (fk_user2_ID) REFERENCES users_tb (user_ID) ON DELETE CASCADE);
+-- Create a table for messages
+CREATE TABLE IF NOT EXISTS messages_tb (message_ID INTEGER AUTO_INCREMENT PRIMARY KEY, message_text TEXT, message_read BOOLEAN DEFAULT False, message_sender_ID INTEGER, delivery_time DATETIME DEFAULT CURRENT_TIMESTAMP, fk_group_ID INTEGER, FOREIGN KEY (fk_group_ID) REFERENCES message_groups_tb(group_ID) ON DELETE CASCADE);
+-- Create a table to store everyones private keys
+CREATE TABLE IF NOT EXISTS keys_tb (key_ID INTEGER AUTO_INCREMENT PRIMARY KEY, public_key_1 TEXT, private_key_1 TEXT, public_key_2 TEXT, private_key_2 TEXT);
+-- Create a link table to link group chats to their keys
+CREATE TABLE IF NOT EXISTS group_key_link_tb (fk_key_ID INTEGER PRIMARY KEY, fk_group_ID INTEGER, FOREIGN KEY (fk_key_ID) REFERENCES keys_tb (key_ID) ON DELETE CASCADE, FOREIGN KEY (fk_group_ID) REFERENCES message_groups_tb (group_ID) ON DELETE CASCADE);
+
 -- For user's responses
 -- Create a table to store the user's response to each question
 CREATE TABLE IF NOT EXISTS users_response_tb(response_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user_ID INTEGER, fk_answer_ID INTEGER, users_response TEXT, FOREIGN KEY (fk_user_ID) REFERENCES users_tb(user_ID) ON DELETE CASCADE, FOREIGN KEY (fk_answer_ID) REFERENCES answers_tb(answer_ID) ON DELETE CASCADE);

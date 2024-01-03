@@ -30,7 +30,7 @@ if ( mysqli_connect_errno() ) {
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-				<h1>Website Title</h1>
+				<h1>FusionFlirt</h1>
 				<a href="home.php">Home</a>
 				<a href="surveys_page.php">Surveys Page</a>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
@@ -71,6 +71,6 @@ if ( mysqli_connect_errno() ) {
             $stmt->close();
 
             // Now that setup has been complete, take the user back to the profile page
-            header('Location: /dating_App/fusionflirt1.3/profile.php');
+            header('Location: /dating_App/fusionFlirt1.5/profile.php');
             exit();
         }
