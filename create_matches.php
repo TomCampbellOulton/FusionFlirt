@@ -235,6 +235,8 @@ if (sizeof($users_wants_radio) > 0){
 			while ($stmt->fetch()) {
 				$matched = True;
 			}
+			$stmt->close();
+
 			// Now check to see if they have matched with the other user having initiated the matching process
 			$stmt = $con->prepare('SELECT user1Responded, user2Responded, accepted FROM matches_tb WHERE fk_user1_ID = ? AND fk_user2_ID = ?');
 			$stmt->bind_param('ii', $user_ID, $match);
@@ -243,7 +245,8 @@ if (sizeof($users_wants_radio) > 0){
 			while ($stmt->fetch()) {
 				$matched = True;
 			}
-
+			$stmt->close();
+			
 			if ($matched !== True){
 				// As neither user has responded to this match yet, set it to default of False
 				$default_response = False;
@@ -253,25 +256,8 @@ if (sizeof($users_wants_radio) > 0){
 				$stmt->bind_param('iibbbi', $user_ID, $match, $default_response, $default_response, $default_response_for_acceptance, $score);
 				$stmt->execute();
 				$stmt->close();
-			}else{
-				// Check if both of them have already responded
-				if ($user_responded === True && $match_responded === True){ // They have both responded
-					echo 'You have both already matched with this person. ';
-					// Check if they've accepted or declined
-					if ($accepted === True){
-						echo 'You have both accepted so can now communicate :D';
-					}else {
-						echo 'One of you have declined this match and are therefore incompatible. My apologies.';
-					}
-				}else{// Only one or neither has responded
-					// Check who hasn't responded yet
-					if ($user_reponded === False){// The user hasn't responded yet
-						echo '<br>You need to respond to this match please.';
-					}else{// The other person hasn't responded yet
-						echo '<br>Please be patient whilst you wait for your matches.';
-					}
-				}
 			}
+			
 		} else{
 			echo '<br>You were rejected';
 		}
@@ -281,7 +267,7 @@ if (sizeof($users_wants_radio) > 0){
 }
 
 
-header('Location: /dating_App/fusionflirt1.4/home.php');
+header('Location: /dating_App/fusionFlirt1.5/home.php');
 exit();
 
 

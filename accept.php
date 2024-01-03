@@ -27,6 +27,9 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
     // User 1 or 2
     $user1Or2 = $_POST['user1Or2'];
 
+    // Other user's ID
+    $other_user_ID = $_POST['other_user_ID'];
+
     // Responded or not
     $responded = True;
     // Accept=True or decline=delete
@@ -48,9 +51,51 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
         $stmt->execute();
         $stmt->close();
     }
+    
+    // Now check to see if they have matched with the other user having initiated the matching process
+    $stmt = $con->prepare('SELECT user1Responded, user2Responded, accepted FROM matches_tb WHERE fk_user1_ID = ? AND fk_user2_ID = ?');
+    $stmt->bind_param('ii', $user_ID, $other_user_ID);
+    $stmt->execute();
+    $stmt->bind_result($user_responded, $match_responded, $accepted);
+    while ($stmt->fetch()) {
+        $matched = True;
+    }
+    // Check if both of them have already responded
+    echo $user_responded,$match_responded;
+    if ($user_responded === 1 && $match_responded === 1){ // They have both responded
+        echo 'You have both already matched with this person. ';
+        // Check if they've accepted or declined
+        if ($accepted === 1){
+            echo 'You have both accepted so can now communicate :D';
+            // Now create a chat between the two users
+            $stmt = $con->prepare('INSERT INTO message_groups_tb (fk_user1_ID, fk_user2_ID) VALUES (?, ?)');
+            $stmt->bind_param('ii', $user_ID, $other_user_ID);
+            $stmt->execute();
+            $stmt->close();
+            // Get the group ID
+            $stmt = $con->prepare('SELECT LAST_INSERT_ID() AS g_ID;');
+            $stmt->execute();
+            $stmt->bind_result($group_ID);
+            while ($stmt->fetch()){
+                // Store their group_ID
+                $_SESSION['group_ID'] = $group_ID;
+            }
+            // Now generate their keys
+            header('Location: /dating_App/fusionFlirt1.5/generate_keys.php');
+            exit();
+
+        }else {
+            echo 'One of you have declined this match and are therefore incompatible. My apologies.';
+        }
+    }else{// Only one or neither has responded
+        // Check who hasn't responded yet
+        if ($user_responded === False){// The user hasn't responded yet
+            echo '<br>You need to respond to this match please.';
+        }else{// The other person hasn't responded yet
+            echo '<br>Please be patient whilst you wait for your matches.';
+        }
+    }
 }
-header('Location: /dating_App/fusionflirt1.4/home.php');
-exit();
-
-
+//header('Location: /dating_App/fusionFlirt1.5/home.php');
+//exit();
 ?>

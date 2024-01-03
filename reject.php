@@ -35,7 +35,7 @@ if (isset($_POST['respond'])){ // If the user has clicked on decline
     $stmt->close();
     
 }
-header('Location: /dating_App/fusionflirt1.4/home.php');
+header('Location: /dating_App/fusionFlirt1.5/home.php');
 exit();
 
 

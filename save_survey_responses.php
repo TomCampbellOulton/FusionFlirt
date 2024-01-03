@@ -28,7 +28,7 @@ $user_ID = $_SESSION['id'];
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-				<h1>Website Title</h1>
+				<h1>FusionFlirt</h1>
 				<a href="home.php">Home</a>
 				<a href="surveys_page.php">Surveys Page</a>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>

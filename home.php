@@ -35,13 +35,13 @@ $user_ID = $_SESSION['id'];
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-				<h1>Website Title</h1>
+				<h1>FusionFlirt</h1>
 				<a href="home.php">Home</a>
+				<a href="create_matches.php"></i>Make Me Matches Please c:</a>
+				<a href="messages_page.php"></i>Messages ;)</a>
 				<a href="surveys_page.php">Surveys Page</a>
 				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-				<a href="showprofile.php"></i>Testing</a>
-				<a href="create_matches.php"></i>Make Me Matches Please c:</a>
 			</div>
 		</nav>
 		<div class="content">
@@ -178,6 +178,7 @@ $user_ID = $_SESSION['id'];
 				<button type='submit' value='<?php echo $new_match['match_ID']; ?>' name='respond'>Accept</button>
 				<!-- Add a hidden input field to include the id attribute -->
 				<input type='hidden' value='<?php echo $u1Or2; ?>' name='user1Or2'>
+				<input type='hidden' value='<?php echo $matches_user_ID; ?>' name='other_user_ID'>
 				</form>
 				<?php
 
@@ -190,18 +191,4 @@ $user_ID = $_SESSION['id'];
 		</div>
 	</body>
 
-	
-				<?php
-				if ($stmt = $con->prepare('SELECT survey_ID, surveyTopic FROM survey_tb')) {
-					$stmt->execute();
-				
-					$result = $stmt->get_result();
-					foreach ($result as $row){
-					?><button name="survey" type="submit" value="<?php echo $row['survey_ID'] ?>"> 
-					<?php echo $row['surveyTopic'] ?> 
-					</button>
-					<?php
-					}
-				}?>
-			</form>
 </html>
