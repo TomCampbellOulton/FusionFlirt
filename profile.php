@@ -163,11 +163,14 @@ if ( mysqli_connect_errno() ) {
 			$stmt = $con->prepare('SELECT image, image_name, image_type FROM images_tb WHERE image_ID IN (' . $image_IDs . ')');
 			$stmt->execute();
 			$stmt->store_result();
-		
+			
 			while ($stmt->fetch()) {
 				// For each image, display it
 				$stmt->bind_result($image, $image_name, $image_type);
 				echo '<img src="display_image.php?image_ids=' . $image_IDs . '" alt="Image">';
+
+				// Add a button next to it to remove it
+
 			}
 		
 			$stmt->close();

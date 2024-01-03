@@ -16,6 +16,11 @@ if ( mysqli_connect_errno() ) {
 	// If there is an error with the connection, stop the script and display the error.
 	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
+
+// Get the user's ID
+$user_ID = $_SESSION['id'];
+
+
 ?>
 
 
@@ -47,20 +52,24 @@ if ( mysqli_connect_errno() ) {
 
 			<p>
 			<?php
+			
+
+
+			// Checks how many matches there were
+			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID, user1Responded, user2Responded FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ? ORDER BY score ASC');
+			$stmt->bind_param('ii', $user_ID, $user_ID);
+			$stmt->execute();
+			$stmt->bind_result($match_ID, $user1_ID, $user2_ID, $user1Responded, $user2Responded);
+
 			// The user's ID
 			$user_ID = $_SESSION["id"];
 			// Check to see if the user has any matches
-
-			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ? ORDER BY score ASC');
-			$stmt->bind_param('ii', $user_ID, $user_ID);
-			$stmt->execute();
-			$stmt->bind_result($match_ID, $user1_ID, $user2_ID);
-			
-
 			$matches = array();
 			// Store all the matches in an array
 			while ($stmt->fetch()) {
 				// Process each match
+				// Assume the user has not responded
+				$response = False;
 				// Store all the matches in a stack
 
 				// Find the ID of the other user in the match
@@ -69,22 +78,30 @@ if ( mysqli_connect_errno() ) {
 					$matches_ID = $user2_ID;
 					// Which 'user' (1 or 2) is the user
 					$u1Or2 = 'user1';
+					// Record the response
+					$response = $user1Responded;
 				}else {
 					// Who the other person is
 					$matches_ID = $user1_ID;
 					// Which 'user' (1 or 2) is the user
 					$u1Or2 = 'user2';
+					// Record the response
+					$response = $user2Responded;
 				}
 
-				$matches[] = array('match_ID'=>$match_ID, 'users_ID'=>$matches_ID, 'user1OrUser2'=>$u1Or2);
+				if ($response === 0){ // If the user has not responded yet
+					$matches[] = array('match_ID'=>$match_ID, 'users_ID'=>$matches_ID, 'user1OrUser2'=>$u1Or2);
+				}
 			}
 			$stmt->close();
-			// Checks how many matches there were
+
 			if (sizeof($matches) > 0){// If there is more than 1 match in the stack, start iterating through the stack
 				$new_match = array_pop($matches);
 				// Display this match
 				$matches_user_ID = $new_match['users_ID'];
 				echo 'users ID = '.$matches_user_ID;
+				// User 1 or User 2
+				$u1Or2 = $new_match['user1OrUser2'];
 
 				// Get their profile ID and other personal details
 				$stmt = $con->prepare('SELECT username, firstname, surname, dateOfBirth, fk_contact_ID, fk_profile_ID FROM users_tb WHERE user_ID = ?');
@@ -115,59 +132,55 @@ if ( mysqli_connect_errno() ) {
 				echo '<br>Biography - '.$biography;
 
 				// Get their pictures
-				
-
-				// Add the accept and reject buttons
-				?>
-				<form method='POST'>
-					<button type='submit' value='reject' name='respond'>Reject</button>
-					<button type='submit' value='accept' name='respond'>Accept</button>
-				</form>
 
 
+				// Show the user all their images
+				$stmt = $con->prepare('SELECT fk_image_ID FROM images_profile_link_tb WHERE fk_profile_ID = ?');
+				$stmt->bind_param('i', $profile_ID);
+				$stmt->execute();
+				$stmt->store_result();
+				$stmt->bind_result($fk_image_ID);
+				$image_IDs = ''; // Initialize the string
 
-
-				<?php
-				if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
-
-					// The match ID
-					$match_ID = $new_match['match_ID'];
-
-					// If the user accepted
-					if ($_POST['respond'] === 'accept'){
-						// User 1 or 2
-						$user1Or2 = $new_match['user1OrUser2'];
-						// Responded or not
-						$responded = True;
-						// Accept=Tr or decline
-						$accept = True;
-
-						if ($user1Or2 === 'user1'){ // If it's user 1
-							$stmt = $con->prepare('UPDATE matches_tb  SET user1Responded = ?, accepted = ? WHERE fk_user1_ID = ?');
-							echo $responded, $accept, $user_ID;
-							// If the user has accepted, add this to the database
-							$stmt->bind_param('iii', $responded, $accept, $user_ID);
-							$stmt->execute();
-							$stmt->close();
-
-						}else{// Otherwise they're user 2
-							$stmt = $con->prepare('UPDATE matches_tb  SET user2Responded = ?, accepted = ? WHERE fk_user2_ID = ?');
-
-							// If the user has accepted, add this to the database
-							$stmt->bind_param('iii', $responded, $accept, $user_ID);
-							$stmt->execute();
-							$stmt->close();
-						}
-						
-					}else{ // The user declined
-						$stmt = $con->prepare('DELETE FROM matches_tb  WHERE match_ID = ?');
-
-						// If the user has accepted, add this to the database
-						$stmt->bind_param('i', $match_ID);
-						$stmt->execute();
-						$stmt->close();
-					}
+				while ($stmt->fetch()) {
+					$image_IDs .= $fk_image_ID . ','; // Concatenate the image IDs
 				}
+				
+				if ($stmt->num_rows > 0) {
+					$stmt->close();
+				
+					// Remove the trailing comma from $image_IDs
+					$image_IDs = rtrim($image_IDs, ',');
+				
+					// Show these images
+					$stmt = $con->prepare('SELECT image, image_name, image_type FROM images_tb WHERE image_ID IN (' . $image_IDs . ')');
+					$stmt->execute();
+					$stmt->store_result();
+					
+					while ($stmt->fetch()) {
+						// For each image, display it
+						$stmt->bind_result($image, $image_name, $image_type);
+						echo '<img src="display_image.php?image_ids=' . $image_IDs . '" alt="Image">';
+
+						// Add a button next to it to remove it
+
+					}
+				
+					$stmt->close();
+				}
+				?>
+
+				<!-- Add the accept and reject buttons -->
+				<form method='POST' action='reject.php'>
+				<button type='submit' value='<?php echo $new_match['match_ID']; ?>' name='respond'>Reject</button>
+				</form>
+				<form method='POST' action='accept.php'>
+				<button type='submit' value='<?php echo $new_match['match_ID']; ?>' name='respond'>Accept</button>
+				<!-- Add a hidden input field to include the id attribute -->
+				<input type='hidden' value='<?php echo $u1Or2; ?>' name='user1Or2'>
+				</form>
+				<?php
+
 			} else{ // There are no matches
 				echo "no matches :c";
 			}
