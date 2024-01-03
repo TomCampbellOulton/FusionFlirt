@@ -135,12 +135,13 @@ if (sizeof($users_wants_radio) > 0){
 
 	echo '<br>';
 
-	// Create an array to store the number of times that the user meets each rating
-	$users_rating = array(0,0,0,0,0,0,0);// Number of times meeting the ratings 1-7
-	// Create a variable to check if the user has been rejected yet
-	$rejected = False;
+
 	// Here are all the people who meet the user's requirements
 	foreach ($possible_matches as $match){
+		// Create an array to store the number of times that the user meets each rating
+		$users_rating = array(0,0,0,0,0,0,0);// Number of times meeting the ratings 1-7
+		// Create a variable to check if the user has been rejected yet
+		$rejected = False;
 		echo '<br>We have found you a match! Their ID is: '.$match;
 		// Now to check if the user meets their requirements
 
@@ -249,7 +250,7 @@ if (sizeof($users_wants_radio) > 0){
 				$default_response_for_acceptance = Null;
 				// Add the match to the matches table
 				$stmt = $con->prepare('INSERT INTO matches_tb (fk_user1_ID, fk_user2_ID, user1Responded, user2Responded, accepted, score) VALUES (?, ?, ?, ?, ?, ?)');
-				$stmt->bind_param('iibbb', $user_ID, $match, $default_response, $default_response, $default_response_for_acceptance, $score);
+				$stmt->bind_param('iibbbi', $user_ID, $match, $default_response, $default_response, $default_response_for_acceptance, $score);
 				$stmt->execute();
 				$stmt->close();
 			}else{

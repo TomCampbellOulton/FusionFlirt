@@ -1395,12 +1395,15 @@ INSERT INTO answers_tb (answer, questionAnswerLetter, fk_question_ID, response_t
 -- Add the users contact details
 INSERT INTO contact_details_tb (phoneNumber, emailAddress) VALUES (7949018972, 'tcampbelloulton@gmail.com');
 INSERT INTO contact_details_tb (phoneNumber, emailAddress) VALUES (7949018972, 'tcampbelloulton@gmail.com');
+INSERT INTO contact_details_tb (phoneNumber, emailAddress) VALUES (7949018972, 'tcampbelloulton@gmail.com');
 -- Add the users accounts
 INSERT INTO users_tb (username, firstname, hashedPassword, surname, dateOfBirth, fk_contact_ID) VALUES ('JonDoe123', 'Jon', '$2y$10$kn6tyxOnenLNCbwiYYWok.bceK5SyjTb2PXqYgBOG.18QLfhOkBci', 'Doe', '2005-10-21', 1);
-INSERT INTO users_tb (username, firstname, hashedPassword, surname, dateOfBirth, fk_contact_ID) VALUES ('JaneDoe123', 'Keira', '$2y$10$kn6tyxOnenLNCbwiYYWok.bceK5SyjTb2PXqYgBOG.18QLfhOkBci', 'Doe', '2005-10-21', 2);
+INSERT INTO users_tb (username, firstname, hashedPassword, surname, dateOfBirth, fk_contact_ID) VALUES ('JaneDoe123', 'Jane', '$2y$10$kn6tyxOnenLNCbwiYYWok.bceK5SyjTb2PXqYgBOG.18QLfhOkBci', 'Doe', '2005-10-21', 2);
+INSERT INTO users_tb (username, firstname, hashedPassword, surname, dateOfBirth, fk_contact_ID) VALUES ('JemimaDoe123', 'Jemima', '$2y$10$kn6tyxOnenLNCbwiYYWok.bceK5SyjTb2PXqYgBOG.18QLfhOkBci', 'Doe', '2005-10-21', 2);
 -- Activate their accounts
 INSERT INTO authentication_tb (fk_user_ID, activation_code) VALUES (1, 'activated');
 INSERT INTO authentication_tb (fk_user_ID, activation_code) VALUES (2, 'activated');
+INSERT INTO authentication_tb (fk_user_ID, activation_code) VALUES (3, 'activated');
 
 -- Add their responses to a survey
 -- User 1
@@ -1425,6 +1428,17 @@ INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES 
 INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (2, 78, 'on');
 INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (2, 85, 'on');
 INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (2, 92, 'on');
+-- User 3
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 1, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 7, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 21, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 25, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 29, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 47, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 64, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 78, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 85, 'on');
+INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (3, 92, 'on');
 
 -- Add their requirements
 -- User 1
@@ -1447,3 +1461,13 @@ INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUE
 INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (2, 78, 7);
 INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (2, 85, 7);
 INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (2, 92, 7);
+-- User 3
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 7, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 21, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 25, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 29, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 47, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 64, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 78, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 85, 7);
+INSERT INTO users_wants_radio_tb (fk_user_ID, fk_answer_ID, answer_rating) VALUES (3, 92, 7);
