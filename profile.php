@@ -40,7 +40,6 @@ if ( mysqli_connect_errno() ) {
 		<div class="content">
 			<h2>Home Page</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<p>Ello!</p>
 		</div>
 
 
@@ -59,7 +58,7 @@ if ( mysqli_connect_errno() ) {
 		echo "noice";
 
 		// First create a biography
-		header('Location: /dating_App/fusionFlirt1.5/setup_profile.php');
+		header('Location: /dating_App/fusionflirt1.6/setup_profile.php');
 		exit();
 
 	}
@@ -96,7 +95,9 @@ if ( mysqli_connect_errno() ) {
 	$stmt->fetch();
 	$stmt->close();
 
-
+	// Convert the sql datetime into just date
+	$phpdate = strtotime( $dob );
+	$dob = date( 'd-M-Y', $phpdate );
 
 	// Store the IDs
 	// Store the profile_ID
@@ -104,17 +105,28 @@ if ( mysqli_connect_errno() ) {
 	// Store the bio ID
 	$_SESSION['bio_ID'] = $bio_ID;
 
+
+
 	?>
 	<div class="content">
-		<p>Ello!</p>
 
 	<p>
+		Your personal details are as follows:
+		<br>
 		<?php
 		echo "Username: ".$uname."<br> Firstname: ".$fname."<br> Surname: ".$sname."<br> Date Of Birth: ".$dob."<br> Address_ID: ".$fk_add_ID."<br> Contact_ID: ".$fk_cont_ID."<br> Phone Number: ".$phone_num."<br> Email: ".$email;
 		?>
 	</p>
+
+	<form action="change_personal_details.php" method="post">
+		Would you like to change your personal details?
+		<button name="changePersonalDetails" type="submit" value="<?php echo $user_ID; ?>">
+			Change Details
+		</button>
+	</form>
+
 	<p>
-		Add some images? :)
+		Add some images? :)</p>
 		<form method='POST' name='upload_images' enctype='multipart/form-data'>
 			<input type="file" name="image" />
 			<input type="submit" name="submit" value="Upload" />
@@ -179,19 +191,24 @@ if ( mysqli_connect_errno() ) {
 
 	
 		?>
-	</p>
+	
 	<form action="change_bio.php" method="post">
-	<p>
-		Biography
-		<textarea name="users_bio" rows="10" cols="30"><?php echo $bio?></textarea> 
-
-	</p>
-
+		<br>Your Biography
+		<textarea name="users_bio" rows="5" cols="113"><?php echo $bio?></textarea> 
 		<button name="changeBio" type="submit" value="changeBio">
 			Change biography
 		</button>
 	</form>
-	</div>	
+
 	
+	<form action="delete_account.php" method="post">
+		<br>Delete Your Account!
+		<button name="deleteAccount" type="submit" value="<?php echo $user_ID; ?>">
+			<p>Delete Your Account</p>
+		</button>
+	</form>
+
+
+	</div>	
 	</body>
 </html>	

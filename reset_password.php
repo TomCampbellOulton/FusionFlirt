@@ -8,22 +8,15 @@
 	</head>
 	<body>
 		<div class="login">
-			<h1>Login</h1>
-			<form action="authenticate.php" method="post">
+			<h1>Resetting Your Password</h1>
+			<form action="send_new_password.php" method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
 				<input type="text" name="username" placeholder="Username" id="username" required>
 
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit" value="Login">
-				<a href="register.html">Sign up</a>
-				<a href="index.html">Home</a>
-				<a href="reset_password.php">Reset Your Password</a>
-				
+				<input type="submit" value="Reset!">
+
 			</form>
 		</div>
 	</body>

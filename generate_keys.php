@@ -61,7 +61,7 @@ $stmt->bind_param('ii', $key_ID, $group_ID);
 $stmt->execute();
 $stmt->close();
 
-header('Location: /dating_App/fusionFlirt1.5/home.php');
+header('Location: /dating_App/fusionflirt1.6/home.php');
 exit();
 
 ?>

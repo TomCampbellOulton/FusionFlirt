@@ -71,6 +71,6 @@ if ( mysqli_connect_errno() ) {
             $stmt->close();
 
             // Now that setup has been complete, take the user back to the profile page
-            header('Location: /dating_App/fusionFlirt1.5/profile.php');
+            header('Location: /dating_App/fusionflirt1.6/profile.php');
             exit();
         }

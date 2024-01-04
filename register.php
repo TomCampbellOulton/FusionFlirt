@@ -114,7 +114,7 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
             $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
             // Update the activation variable below
             $activate_link = 'http://localhost/dating_App/fusionflirt1.2/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
-            $message = '<p>' . $_POST['password'] . 'Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a>' . $bonus . '</p>';
+            $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a>' . $bonus . '</p>';
             mail($_POST['email'], $subject, $message, $headers);
             echo 'Please check your email to activate your account!';
         } else {

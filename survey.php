@@ -54,6 +54,7 @@ if ($stmt = $con->prepare('SELECT question_ID, questionText FROM questions_tb WH
 
 session_regenerate_id();
 $_SESSION['survey_ID'] = $_POST['survey'];
+$users_ID = $_SESSION['id'];
 ?>
 	
 <!DOCTYPE html>
@@ -101,9 +102,34 @@ $_SESSION['survey_ID'] = $_POST['survey'];
 					<?php
 					// Write out all the answers to the question :)
 					foreach ($answers as $ans){
+						$default = False;
+						$response = '';
+						// Get the response text and the response type
 						$a_text = $ans['answer'];
 						$resp_type = $ans['response_type'];
 						$ans_ID = $ans['answer_ID'];
+						// Get the users response to the question (if it exists)
+						// Check if the user has responded or not
+						$stmt = $con->prepare('SELECT users_response FROM users_response_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+						$stmt->bind_param('ii',$users_ID, $ans_ID);
+						$stmt->execute();
+						$stmt->bind_result($response);
+						$stmt->fetch();
+						// Check if there was a response
+						if (isset($response) && $response !== ''){// If there was a response, save it
+							// If it's a radio or checkbox input, default is 1
+							if ($resp_type === "checkbox" or $resp_type === "radio"){
+								$default = True;
+							}else{// otherwise record what's stored in teh database
+								$default = $response;
+							}
+						} else {// If there wasn't a response, set default to off
+							$default = False;
+						}
+						
+						// Close the statement
+						$stmt->close();
+
 						?>
 						
 						<!-- Checks if the response type for the input will be checkbox, radio or input -->
@@ -111,15 +137,17 @@ $_SESSION['survey_ID'] = $_POST['survey'];
 						if ($resp_type === "radio"){?>
 							<!-- Creates the appropraite response type for each response and adds them to the form -->
 							<!-- For checkboxes or radio inputs, don't record the "response text" just the ID of the response -->
-							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="<?php echo $ans_ID?>" name="<?php echo $q_ID?>">
+							<!-- IF Checked, check otherwise don't -->
+							
+							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="<?php echo $ans_ID?>" name="<?php echo $q_ID?>" <?php if($default){echo 'checked';} ?>>
 							<?php
 						}else if ($resp_type === "checkbox"){?>
-							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="<?php echo $ans_ID?>" name="<?php echo $q_ID?>">
+							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="<?php echo $ans_ID?>" name="<?php echo $q_ID?>" <?php if($default){echo 'checked';} ?>>
 							<?php
 						}else{?>
 							<!-- Creates the appropraite response type for each response and adds them to the form -->
 							<!-- For inputs, record the "response text". Default Value will be empty -->
-							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="" name="<?php echo $q_ID?>">
+							<input type="<?php echo $resp_type?>" id="<?php echo $ans_ID?>" value="<?php echo $default; ?>" name="<?php echo $q_ID?>">
 							    <!-- Add a hidden input field to include the id attribute -->
 							<input type="hidden" name="<?php echo $q_ID?>" value="<?php echo $ans_ID?>">
 							<?php
@@ -137,7 +165,6 @@ $_SESSION['survey_ID'] = $_POST['survey'];
 					</fieldset>
 					<?php
 				}
-				// Now all the forms are complete, the final form needs to be closed
 				?>
 			
 				<!-- Submit Button -->

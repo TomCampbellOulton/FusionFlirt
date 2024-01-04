@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS  responses_users_link_tb(fk_response_ID, fk_user_ID, 
 CREATE TABLE IF NOT EXISTS  matches_tb(match_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user1_ID INTEGER, fk_user2_ID INTEGER, user1Responded BOOL, user2Responded BOOL, FOREIGN KEY (fk_user1_ID) REFERENCES users_tb(user_ID), FOREIGN KEY (fk_user2_ID) REFERENCES users_tb(user_ID))
 CREATE TABLE IF NOT EXISTS  difficulty_level_tb(fk_survey_ID INTEGER PRIMARY KEY, difficultyLevel INTEGER, FOREIGN KEY (fk_survey_ID) REFERENCES survey_tb(survey_ID));
 CREATE TABLE IF NOT EXISTS  social_media_links_tb(social_media_link_ID INTEGER AUTO_INCREMENT PRIMARY KEY, fk_user_ID INTEGER, socialMediaLink TEXT, FOREIGN KEY (fk_user_ID) REFERENCES users_tb(user_ID))INSERT INTO survey_tb (surveyTopic) VALUES ("Basic Info (pronouns, identity, etc) ");
-INSERT INTO survey_tb (surveyTopic) VALUES ("Basic Info (pronouns, identity, etc)");
 INSERT INTO survey_tb (surveyTopic) VALUES ("Physical Attributes ");
 INSERT INTO survey_tb (surveyTopic) VALUES ("Marriage ");
 INSERT INTO survey_tb (surveyTopic) VALUES ("Finances ");

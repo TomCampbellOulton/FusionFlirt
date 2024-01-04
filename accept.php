@@ -81,7 +81,7 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
                 $_SESSION['group_ID'] = $group_ID;
             }
             // Now generate their keys
-            header('Location: /dating_App/fusionFlirt1.5/generate_keys.php');
+            header('Location: /dating_App/fusionflirt1.6/generate_keys.php');
             exit();
 
         }else {
@@ -96,6 +96,6 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
         }
     }
 }
-//header('Location: /dating_App/fusionFlirt1.5/home.php');
-//exit();
+header('Location: /dating_App/fusionflirt1.6/home.php');
+exit();
 ?>
