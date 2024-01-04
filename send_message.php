@@ -78,6 +78,6 @@ $stmt->execute();
 $stmt->close();
 echo $key_ID;
 
-header('Location: /dating_App/fusionflirt1.6/individual_chats_page.php');
+header('Location: /dating_App/fusionflirt1.7/individual_chats_page.php');
 exit();
 ?>
