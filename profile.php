@@ -58,7 +58,7 @@ if ( mysqli_connect_errno() ) {
 		echo "noice";
 
 		// First create a biography
-		header('Location: /dating_App/fusionflirt1.6/setup_profile.php');
+		header('Location: /dating_App/fusionflirt1.7/setup_profile.php');
 		exit();
 
 	}

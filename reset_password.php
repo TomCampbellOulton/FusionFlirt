@@ -21,3 +21,8 @@
 		</div>
 	</body>
 </html>
+<?php
+// Return to the home screen
+header('Location: /dating_App/fusionflirt1.7/index.php');
+exit();
+?>

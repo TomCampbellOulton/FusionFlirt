@@ -26,6 +26,6 @@ $stmt->close();
 // Remove their session ID
 $_SESSION['id'] = NULL;
 // Return them to the homepage
-header('Location: /dating_App/fusionflirt1.6/index.php');
+header('Location: /dating_App/fusionflirt1.7/index.php');
 exit();
 ?>
