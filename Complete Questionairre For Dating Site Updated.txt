@@ -169,12 +169,16 @@ c.	___ Body
 a.	Yes 
 b.	No 
 c.	Prefer not to say 
-19.	Average lifespan of ancestors (In years approximately): __ 20. Dietary restrictions: 
-a.	Vegan 
-i.	Optionally ii. For health iii. Environment iv. For ethics of animal treatment v. Other  
-vi. Prefer not to say 
-b.	Vegetarian 
-i.	Optionally ii. For health 
+19.	Average lifespan of ancestors (In years approximately): __ 
+20. Dietary restrictions: 
+a.	Vegan for Optionally 
+b. Vegan For health 
+c.Vegan for Environment 
+d. vegan For ethics of animal treatment 
+e. Vegan for other reasons.
+f. Prefer not to say why I'm vegan.
+g.	Vegetarian Optionally 
+h. Vegetarian For health 
 iii. Environment iv. For ethics of animal treatment v. Other  
 vi. Prefer not to say 
 c.	Pescatarian 
@@ -241,18 +245,16 @@ a.	Yes
 b.	No 
 c.	Prefer not to say 
 30.	Electric, petrol or diesel car? 
-a. Public transport only 
-i.	Convenience 
-ii.	Environment 
-b. Electric 
-i.	Cost 
-ii.	Environment 
-iii.	Both 
-c.	Petrol 
-d.	Diesel 
-e.	None 
-f.	Other 
-g.	Prefer not to say 
+a. Public transport only for Convenience 
+b.	Public transport only for Environment 
+c. Electric for Cost 
+d.	Electric for Environment 
+e.	Electric for Both 
+f.	Petrol 
+g.	Diesel 
+h.	None 
+i.	Other 
+j.	Prefer not to say 
 31.	How much debt are you in? 
 a.	Student loans 	 
 i.	£___ 
@@ -459,47 +461,7 @@ d.	Country
 e.	Seaside 
 f.	Prefer not to say 
 g.	Other 
-64.	Size of house desired 
-a.	Bedrooms 
-i.	1/2
-ii.	3/4
-iii.	5-7
-iv.	>7 
-iv.	Prefer not to say 
-b.	Bathrooms
-i.	1
-ii.	2
-iii.	3
-iv.	>3
-v.	Prefer not to say
-c.	Dining rooms 
-i.	0
-ii.	1
-iii.	2 
-iv.	>2
-v.	Prefer not to say
-e.	Social Rooms (living rooms, drawing rooms) 
-i.	0
-ii.	1
-iii.	2 
-iv.	>2 
-v.	Prefer not to say 
-f.	Cinema rooms? 
-i.	0
-ii.	1 
-iii.	2 
-iv.	>2 
-v.	Prefer not to say 
-g.	Pool 
-i.	Yes 
-ii.	No 
-iii.	Prefer not to say 
-iv.	Don't mind/ unbothered 
-h.	Hot tub 
-i.	Yes 
-ii.	No 
-iii.	Prefer not to say 
-iv.	Don't mind/ unbothered 
+
 66.	Desired frequency for holidays 
 a.	Every week 
 b.	Every month 
@@ -620,12 +582,11 @@ c.	Prefer not to say
 89.	Do you think snitching is acceptable? 
 a.	Yes 
 b.	No 
-c.	Depends 
-i.	If life-threatening; yes 
-ii.	If it will benefit me; yes 
-iii.	Other 
-d.	Prefer not to say 
-e.	Other 
+c.	Depends If life-threatening; yes 
+d.Depends If it will benefit me; yes 
+e.	Depends Other 
+f.	Prefer not to say 
+g.	Other 
 90.	If you and your partner have a disagreement in public, when do you discuss it? 
 a.	In public where the disagreement happens 
 b.	In the car, in private 
@@ -643,14 +604,6 @@ f.	Prefer not to say
 a.	Yes 
 b.	No 
 c.	Prefer not to say 
-93.	Train dilemma: A train is on the tracks to hit two people. There is a leaver you can pull to save those two but kill an innocent person. Do you switch the tracks or leave them? a. Decision 
-i.	Flip the switch 
-ii.	Leave it 
-iii.	Prefer not to say 
-b. Reasons 
-i.	Ethical 
-ii.	Legal (Avoid liability) iii. Other 
-iv. Prefer not to say 
 94.	If you have two children, A and B, and it is A's birthday, does B get a present? 
 a.	Yes 
 b.	No 
@@ -706,12 +659,12 @@ c.	Prefer not to say
 104.	Parents still together: 
 a.	Yes 
 b.	No 
-i.	Death 
-ii.	Divorce 
-iii.	Other 
-iv.	Prefer not to say 
-c.	Other 
-d.	Prefer not to say 
+c. No -	Death 
+d. No -	Divorce 
+e. No -	Other 
+f. No -	Prefer not to say 
+g.	Other 
+h.	Prefer not to say 
 105.	Father figure in your life? 
 a.	Yes 
 b.	No 
@@ -791,36 +744,25 @@ d.	Prefer not to say
  
 e.	Other 
 118.	MBTI Type 
-a. Extrovert 
-i. ___% 
-b. Introvert 
-i. ___% 
-c. Sensor 
-i. ___% 
-d. Intuitive 
-i. ___% 
-e. Thinker 
-i. ___% 
-f. Feeler 
-i. ___% 
-g. Judger 
-i. ___% 
-h.	Perceiver 
-i.	___% 
-	i. 	Assertive 
-i.	___% 
-j.	Turbulent 
-i. ___% 
+a. Extrovert ___% 
+b. Introvert ___% 
+c. Sensor ___% 
+d. Intuitive___% 
+e. Thinker ___% 
+f. Feeler ___% 
+g. Judger ___% 
+h.	Perceiver ___% 
+i. 	Assertive ___% 
+j.	Turbulent ___% 
 119.	Smoke? (Cigarettes) 
-a. Yes 
-i.	Only socially on occasion 
-ii.	Once a week 
-iii.	Most days iv. 1-3 a day v. 4-7 a day 
-vi.	8-15 a day 
-vii.	> 15 a day 
-viii.	Prefer not to specify 
-b.	No 
-c.	Prefer not to say 
+a. Yes - Only socially on occasion 
+b. Yes - 	Once a week 
+c.	Yes - Most days iv. 1-3 a day v. 4-7 a day 
+d.	Yes - 8-15 a day 
+e.	Yes - > 15 a day 
+f.	Yes - Prefer not to specify 
+g.	No 
+h.	Prefer not to say 
 120.	New or old Footloose? 
 a.	New 
 b.	Old 
@@ -831,32 +773,21 @@ a.	Yes
 b.	No 
 c.	Prefer not to say 
 122.	Drink? (Alcohol) 
-	a.	Yes 
-i.	Only socially on occasion 
-ii.	Once a week (1-2 units) iii. Only at the weekend (1-4 Units)  iv. 4-7 units a week 
-v.	8-12 units a week 
-vi.	>13 units a week 
-vii.	Prefer not to specify 
-b.	No 
-c.	Prefer not to say 
+	a.	Yes Only socially on occasion 
+b. Yes - 	Once a week (1-2 units) 
+c. Yes - Only at the weekend (1-4 Units)  
+d.  Yes - 4-7 units a week 
+e. Yes -	8-12 units a week 
+f. Yes -	>13 units a week 
+g.	Prefer not to specify 
+h.	No 
+i.	Prefer not to say 
 123.	Physical fitness level? (Qualitative) 
 a.	Very Fit 
 b.	Reasonably Fit 
 c.	Average 
 d.	Unfit 
 e.	Very unfit 
-124.	Have you spent time in the military? 
-a. Yes 
-i. Time 
-1.	<1 year 
-2.	< 3 years 3. < 5 years 
-4.	> 5 years 
-5.	Prefer not to say ii. Tours 
-6.	5. Prefer not to say 
-b.	No 
-c.	Still active duty 
-d.	Other 
-e.	Prefer not to say 
 125.	Would you have farm animals; such as chickens? 
 a.	Yes 
 b.	No 
@@ -884,22 +815,21 @@ f.	Prefer not to say
  
 Holidays 
 129.	Do you celebrate Christmas? 
-a. Yes 
-i.	Religiously 
-ii.	Not religiously 
-b.	No 
-c.	Prefer not to say 
+a. Yes - Religiously 
+b. Yes - Not religiously 
+c.	No 
+d.	Prefer not to say 
 130.	Do you celebrate Valentines? 
 a.	Yes 
 b.	No 
 c.	Prefer not to say 
 131.	Do you celebrate Easter? 
-a. Yes 
-i.	Just eat some chocolate 
-ii.	Easter egg hunts 
-iii.	Prefer not to specify iv. Other 
-b.	No 
-c.	Prefer not to say 
+a. Yes Just eat some chocolate 
+b.	Yes - Easter egg hunts 
+c.	Prefer not to specify
+d. Other 
+e.	No 
+f.	Prefer not to say 
 132.	Do you celebrate Thanksgiving? 
 a.	Yes 
 b.	No 
@@ -909,12 +839,11 @@ a.	Yes
 b.	No 
 c.	Prefer not to say 
 134.	Do you celebrate Halloween? 
-a. Yes 
-i.	Go trick or treating 
-ii.	Welcome trick or treaters, don't do it myself though. 
-iii.	Prefer not to specify iv. Other 
-b.	No 
-c.	Prefer not to say 
+a. Yes  -	Go trick or treating 
+b. Yes -	Welcome trick or treaters, don't do it myself though. 
+c. Prefer not to specify 
+d.	No 
+e.	Prefer not to say 
 135.	Do you celebrate Chinese New Year? 
 a.	Yes 
 b.	No 

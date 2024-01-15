@@ -35,7 +35,7 @@ if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
 	exit('Password must be between 5 and 20 characters long!');
 }
 // We need to check if the account with that username exists.
-if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT user_ID FROM users_tb WHERE username = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), hash the password using the PHP password_hash function.
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();

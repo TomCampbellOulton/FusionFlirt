@@ -37,18 +37,33 @@ session_regenerate_id();
 		<div class="content">
 			<h2>Home Page</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<p>Ello!</p>
-			<p>
-				For Admins Only!!
-				Change/add/remove questions!
-				<form action="select_survey_to_edit.php" method="post">
-				<button name="select_survey_to_edit" type="submit" value="ello"> 
-					<!-- Text written here goes INSIDE the buttons box-->
-					Select A Survey To Alter
-				</button>
-				</form>
-					
-			</p>
+			<?php
+			$user_ID = $_SESSION['id'];
+			// Only show this IF the user is an admin
+			// Check if the user is an admin
+            $stmt = $con->prepare('SELECT clearanceLevel FROM admins_tb WHERE fk_user_ID = ?');
+            $stmt->bind_param('i', $user_ID);
+            $stmt->execute();
+            // If the user is an admin
+            if ($stmt->num_rows > 0) {
+				$clearance_level = $stmt->fetch();
+				if ($clearance_level> 1){// IF the user is Admin AND has clearance?>
+					<p>
+					For Admins Only!!
+					Change/add/remove questions!
+					<form action="select_survey_to_edit.php" method="post">
+					<button name="select_survey_to_edit" type="submit" value="ello"> 
+						<!-- Text written here goes INSIDE the buttons box-->
+						Select A Survey To Alter
+					</button>
+					</form>
+						
+					</p><?php
+				}
+            }
+			$stmt->close();
+			?>
+			<p> Select the survey you would like to answer below: </p>
 			<form action="survey.php" method="post">
 				<?php
 				if ($stmt = $con->prepare('SELECT survey_ID, surveyTopic FROM survey_tb')) {
