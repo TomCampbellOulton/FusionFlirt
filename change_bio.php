@@ -42,10 +42,11 @@ if ( mysqli_connect_errno() ) {
     $bio_ID = $_SESSION['bio_ID'];
     $user_ID = $_SESSION['id'];
     $profile_ID = $_SESSION['profile_ID'];
+
     
     // Checks if the user already has a bio or not
     $stmt = $con->prepare("SELECT * FROM biography_tb WHERE bio_ID = ?");
-    $stmt->bind_param('i', $user_ID);
+    $stmt->bind_param('i', $bio_ID);
     $stmt->execute();
 
     // Get the result

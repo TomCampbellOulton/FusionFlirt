@@ -19,6 +19,20 @@ if ( mysqli_connect_errno() ) {
 
 $user_ID = $_SESSION["id"];
 
+// Create a search function
+function linear_search($target, $array){
+	// Create a counter for finding the key
+	$key = 0;
+	foreach ($array as $row){
+		if ($row === $target){
+			// Return the key
+			return $key;
+		}
+		// Increment the key each iteration
+		$key ++;
+	}
+}
+
 // Get the user's requirements
 $users_wants_radio = array();
 $users_wants_ranges = array();
@@ -70,7 +84,7 @@ if (sizeof($users_wants_radio) > 0){
 		// Create an array to store the responses for the users
 		$users_responses_array = array();
 		// Check each user's response to that question
-		$stmt = $con->prepare('SELECT fk_user_ID, users_response FROM users_response_tb WHERE fk_answer_ID = ?');
+		$stmt = $con->prepare('SELECT fk_user_ID, usersResponse FROM users_response_tb WHERE fk_answer_ID = ?');
 		$stmt->bind_param('i', $row['fk_ans_ID_radio']);
 		$stmt->execute();
 		$stmt->bind_result($fk_user_ID, $users_response);
@@ -89,43 +103,45 @@ if (sizeof($users_wants_radio) > 0){
 		$numberOfResponses = $stmt->num_rows();
 		$stmt->close();	
 
-
-		// Only remove IF there are responses
-		if ($numberOfResponses > 0){
-			foreach ($users_responses_array as $user){
-				// Checks if the user will reject people if they have it
-				if ($row['answer_rating'] === 1){ // Remove the user
-					// Find the key of the user ID to remove
-					$key = array_search($user['fk_user_ID'], $possible_matches);
-					// Check if the user ID was found in the array
-					if ($key !== false) {
-						// Remove the user ID from the array
-						unset($possible_matches[$key]);
-						// Reindex the array after removing an element
-						$possible_matches = array_values($possible_matches);
+		// Make sure the user isn't themself
+		if ($fk_user_ID!==$user_ID){
+			// Only remove IF there are responses
+			if ($numberOfResponses > 0){
+				foreach ($users_responses_array as $user){
+					// Checks if the user will reject people if they have it
+					if ($row['answer_rating'] === 1){ // Remove the user
+						// Find the key of the user ID to remove
+						$key = linear_search($user['fk_user_ID'], $possible_matches);
+						// Check if the user ID was found in the array
+						if ($key !== false) {
+							// Remove the user ID from the array
+							unset($possible_matches[$key]);
+							// Reindex the array after removing an element
+							$possible_matches = array_values($possible_matches);
+						}
+					} else if ($row['answer_rating'] === 7){ // Checks if the user requires this response
+						$users_who_responded[] = $user['fk_user_ID'];
+						
+					} else{
+						$user_rating = $row['answer_rating'];
+						// Increments the number of times each user has met requirement x by 1
+						$rating_of_possible_matches[$fk_user_ID][$user_rating - 1]++;
+						$users_who_responded[] = $user['fk_user_ID'];
 					}
-				} else if ($row['answer_rating'] === 7){ // Checks if the user requires this response
-					$users_who_responded[] = $user['fk_user_ID'];
-					
-				} else{
-					$user_rating = $row['answer_rating'];
-					// Increments the number of times each user has met requirement x by 1
-					$rating_of_possible_matches['$all_user_IDs'][$user_rating - 1]++;
-					$users_who_responded[] = $user['fk_user_ID'];
 				}
-			}
-			// Removes anyone who didn't meet the requirements
-			foreach ($possible_matches as $user){
-				if (in_array($user, $users_who_responded) === False){
-					// Remove the user
-					// Find the key of the user ID to remove
-					$key = array_search($user, $possible_matches);
-					// Check if the user ID was found in the array
-					if ($key !== false) {
-						// Remove the user ID from the array
-						unset($possible_matches[$key]);
-						// Reindex the array after removing an element
-						$possible_matches = array_values($possible_matches);
+				// Removes anyone who didn't meet the requirements
+				foreach ($possible_matches as $user){
+					if (in_array($user, $users_who_responded) === False){
+						// Remove the user
+						// Find the key of the user ID to remove
+						$key = linear_search($user, $possible_matches);
+						// Check if the user ID was found in the array
+						if ($key !== false) {
+							// Remove the user ID from the array
+							unset($possible_matches[$key]);
+							// Reindex the array after removing an element
+							$possible_matches = array_values($possible_matches);
+						}
 					}
 				}
 			}
@@ -180,7 +196,7 @@ if (sizeof($users_wants_radio) > 0){
 				$rating = $req['answer_rating'];
 				
 				// Get the user's response
-				$stmt = $con->prepare('SELECT users_response FROM users_response_tb WHERE fk_answer_ID = ? AND fk_user_ID = ?');
+				$stmt = $con->prepare('SELECT usersResponse FROM users_response_tb WHERE fk_answer_ID = ? AND fk_user_ID = ?');
 				$stmt->bind_param('ii', $ans_ID, $user_ID);
 				$stmt->execute();
 				$stmt->bind_result($users_response);
@@ -219,9 +235,8 @@ if (sizeof($users_wants_radio) > 0){
 			$score = 0;
 			// Calculate their score
 			// Weight 0 as -3, 1=-2, 2=-1, 3=0, 4=1, 5=2, 6=3
-			$score = $rating_of_possible_matches[$match][0]*-3 + $rating_of_possible_matches[$match][1]*-2 + $rating_of_possible_matches[$match][2]*-1 + $rating_of_possible_matches[$match][4]*1 + $rating_of_possible_matches[$match][5]*2 + $rating_of_possible_matches[$match][6]*3;
-			$score = $score + $users_rating[0]*-3 + $users_rating[1]*-2 + $users_rating[2]*-1 + $users_rating[4]*1 + $users_rating[5]*2 + $users_rating[6]*3;
-			
+			$score = ($rating_of_possible_matches[$match][4] + $rating_of_possible_matches[$match][5]*2 + $rating_of_possible_matches[$match][6]*3)**2 - ($rating_of_possible_matches[$match][1]*2 + $rating_of_possible_matches[$match][2]) **2;
+			$score += ($users_rating[4] + $users_rating[5]*2 + $users_rating[6]*3)**2 - ($users_rating[1]*2 + $users_rating[2])**2;
 
 
 
@@ -267,8 +282,8 @@ if (sizeof($users_wants_radio) > 0){
 }
 
 
-header('Location: /dating_App/fusionflirt1.7/home.php');
-exit();
+//header('Location: /dating_App/fusionflirt1.7/home.php');
+//exit();
 
 
 ?>

@@ -26,6 +26,12 @@ $stmt->bind_param('ii', $user_ID, $user_ID);
 $stmt->execute();
 $stmt->bind_result($group_ID, $fk_user1_ID, $fk_user2_ID);
 
+// Function to decrypt the messages
+function rsaDecrypt($ciphertext, $privateKey) {
+    $decoded_message = base64_decode($ciphertext);
+    openssl_private_decrypt($decoded_message, $decryptedMessage, $privateKey);
+    return $decryptedMessage;
+}
 
 // Store all the chats in an array
 $chats = array();
@@ -75,6 +81,8 @@ $stmt->close();
                     
         // Create a button to access each chat
         foreach ($chats as $chat){
+            // Get the other user's ID
+            $other_user_ID = $chat['other_user_ID'];
             // Get their username
             $stmt = $con->prepare('SELECT username, firstname, surname FROM users_tb WHERE user_ID = ?');
             $stmt->bind_param('i', $other_user_ID);
@@ -98,15 +106,61 @@ $stmt->close();
                 $last_message = array('text'=>$message_text, 'read'=>$message_read, 'sender_ID'=>$message_sender_ID, 'delivery_time'=>$delivery_time);
             }
             $stmt->close();
+
+            // Decrypt the last message    
+            // First find the decryption key
+            $key_IDs = array();
+            $stmt = $con->prepare('SELECT fk_key_ID FROM group_key_link_tb WHERE fk_group_ID = ?');
+            $stmt->bind_param('i', $group_ID);
+            $stmt->execute();
+            $stmt->bind_result($key_ID);
+            while ($stmt->fetch()){
+                $key_IDs[] = $key_ID;
+            }
+            $stmt->close();
+            // Take the last (newest) key ID
+            $key_ID = end($key_IDs);    
+
+            // If the senders ID is smaler than the user's ID
+            if ($message_sender_ID < $user_ID){// Use the 2nd set of keys 
+                $stmt = $con->prepare('SELECT private_key_2 FROM keys_tb WHERE key_ID = ?');
+                $stmt->bind_param('i', $key_ID);
+                $stmt->execute();
+                $stmt->bind_result($key);
+                $stmt->fetch();
+                if (isset($key)) {
+                    $private_key = $key;
+                }
+                $stmt->close();
+            }else {// Use the 1st set of keys
+                $stmt = $con->prepare('SELECT private_key_1 FROM keys_tb WHERE key_ID = ?');
+                $stmt->bind_param('i', $key_ID);
+                $stmt->execute();
+                $stmt->bind_result($key);
+                $stmt->fetch();
+                if (isset($key)) {
+                    $private_key = $key;
+                }
+                $stmt->close();
+            }
+            // If there are any messages in this chat
+            if (isset($last_message['text'])){
+                $encrypted_text = $last_message['text'];
+                $text = rsaDecrypt($encrypted_text, $private_key);
+            }else{// There aren't any messages in this chat
+                $text = 'You haven\'t spoken yet!! Try chatting to each other :)';
+            }
+
             
             ?>
             <p>
                 Here is a chat with <?php echo $fname.' '.$sname.' - ('.$uname.')'; ?>
-                <br>Last message in this chat was: <?php if (isset($last_message['text'])){echo $last_message['text'];}else{echo 'You haven\'t spoken yet!! Try chatting to each other :)';} ?>
+                <br>Last message in this chat was: <?php echo $text ?>
                 <form action="individual_chats_page.php" method="post">
 				<button name="group_ID" type="submit" value="<?php echo $group_ID; ?>"> 
 					<!-- Text written here goes INSIDE the buttons box-->
 					Open your chat with <?php echo $fname;?>
 				</button>
+                </form>
             <?php
         }

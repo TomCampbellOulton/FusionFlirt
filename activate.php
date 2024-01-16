@@ -27,10 +27,10 @@ if (isset($_GET['email'], $_GET['code'])) {
 
 	// If the account has been activated
 	if ($activation_code === "activated"){
-		echo 'The account is active! :D You can now <a href="index.html">login</a>!';
+		echo '<br>The account is active! :D You can now <a href="index.html">login</a>!';
 
 	} else{
-		echo "The account has not been activated :c";
+		echo "The account has not yet been activated.";
 		// Check if the authentication code is correct
 		$code = $_GET['code'];
 		$newCode = "activated";
@@ -46,5 +46,7 @@ if (isset($_GET['email'], $_GET['code'])) {
 		}
 	}
 
+}else{
+	echo 'Please use the activation link from your email!';
 }
 ?>

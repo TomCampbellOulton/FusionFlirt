@@ -104,7 +104,8 @@ if ( mysqli_connect_errno() ) {
 	$_SESSION['profile_ID'] = $fk_profile_ID;
 	// Store the bio ID
 	$_SESSION['bio_ID'] = $bio_ID;
-
+	// Store the contact ID
+	$_SESSION['contact_ID'] = $fk_cont_ID
 
 
 	?>

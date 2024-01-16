@@ -34,8 +34,14 @@ if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
 if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
 	exit('Password must be between 5 and 20 characters long!');
 }
+if (strlen($_POST['phone_number']) > 12 || strlen($_POST['phone_number']) < 8 || preg_match('/[0-9]+$/', $_POST['phone_number']==0)) {
+	exit('Phone number must be between 8 and 12 characters long! Phone number must also be a number!');
+}
+if ($_POST['dob'] > date('Y-m-d',strtotime('18 years ago'))){
+	exit('You must be at least 18 to use this site!');
+}
 // We need to check if the account with that username exists.
-if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT user_ID FROM users_tb WHERE username = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), hash the password using the PHP password_hash function.
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
@@ -72,11 +78,8 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 			}
 			// Store the user's ID
 			$_SESSION["id"] = $user_ID;
-
-			echo $_POST['dob'];
 			
 			?><br><?php
-			echo $user_ID;
 
 			
 			// Add the activation code
@@ -92,8 +95,8 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
 			$stmt->close();
 			// Add the user's contact ID to the users table
 			// Find the contact ID
-			$stmt = $con->prepare('SELECT contact_ID FROM contact_details_tb WHERE emailAddress = ?');
-			$stmt->bind_param('s', $_POST['email']);
+			$stmt = $con->prepare('SELECT contact_ID FROM contact_details_tb WHERE emailAddress = ? AND phoneNumber = ?');
+			$stmt->bind_param('s', $_POST['email'], $_POST['phone_number']);
 			$stmt->execute();
 			$stmt->bind_result($contact_ID);
 			$stmt->fetch();
@@ -113,7 +116,7 @@ if ($stmt = $con->prepare('SELECT user_ID, hashedPassword FROM users_tb WHERE us
             $subject = 'Account Activation Required';
             $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
             // Update the activation variable below
-            $activate_link = 'http://localhost/dating_App/fusionflirt1.2/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+            $activate_link = 'http://localhost/dating_App/fusionflirt1.7/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
             $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a>' . $bonus . '</p>';
             mail($_POST['email'], $subject, $message, $headers);
             echo 'Please check your email to activate your account!';

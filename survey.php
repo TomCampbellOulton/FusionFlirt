@@ -76,7 +76,11 @@ $users_ID = $_SESSION['id'];
 			</div>
 		</nav>
 		<div class="content">
-			<h2>Home Page</h2>
+			<!-- Display the topic of the survey !-->
+			<?php
+			$survey_ID = $_POST['survey'];
+			$survey_topic = $_POST[$survey_ID];?>
+			<h2><?php echo $survey_topic ?></h2>
 			
 				<a href="rate_partner_responses.php"><i class="fas fa-sign-out-alt"></i>rate_partner_responses</a>
 				<form action="save_survey_responses.php" method="post">
@@ -110,7 +114,7 @@ $users_ID = $_SESSION['id'];
 						$ans_ID = $ans['answer_ID'];
 						// Get the users response to the question (if it exists)
 						// Check if the user has responded or not
-						$stmt = $con->prepare('SELECT users_response FROM users_response_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+						$stmt = $con->prepare('SELECT usersResponse FROM users_response_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
 						$stmt->bind_param('ii',$users_ID, $ans_ID);
 						$stmt->execute();
 						$stmt->bind_result($response);

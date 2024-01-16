@@ -71,12 +71,63 @@ if ($user_ID < $other_user_ID){// Use the 1st set of keys
 // Encrypt the message
 $encryptedMessage = rsaEncrypt($message, $public_key);
 
-// Insert into the messages table, the encrypted message, who sent it and which groupchat it was sent to
-$stmt = $con->prepare('INSERT INTO messages_tb (message_text, message_sender_ID, fk_group_ID) VALUES (?, ?, ?)');
-$stmt->bind_param('sis', $encryptedMessage, $user_ID, $group_ID);
-$stmt->execute();
-$stmt->close();
-echo $key_ID;
+
+// First work out the message IDs
+
+// Create the hash function
+function find_hash_keys($group_ID, $max_chat_length = 500){// Use default of 500 for max chat length
+	// Find the lower message ID
+	// This is calculated as the the maximum chat_length multiplied by one less than the groups ID (eg 1,2,3) plus one.  
+	$lower_ID = ($group_ID - 1) * $max_chat_length + 1;
+	// Find the upper message ID
+	$upper_ID = $group_ID * $max_chat_length;
+	// Create an array to store the range
+	$range_of_message_IDs = array('lower_ID'=>$lower_ID, 'upper_ID'=>$upper_ID);
+	return $range_of_message_IDs;
+}
+
+// Get the length of the messages chat
+$max_chat_length = 500;
+// Get the hashed keys
+$message_ID_ranges = find_hash_keys($group_ID);
+// Counter for messages found
+$messages_found = 0;
+
+for ($counter = 0; $counter < $max_chat_length; ++$counter){
+	// The message ID would be equal to the counter plus the hashed key
+	$message_ID = $message_ID_ranges['lower_ID'] + $counter;
+
+	$stmt = $con->prepare('SELECT message_ID FROM messages_tb WHERE message_ID = ?');
+	$stmt->bind_param('i', $message_ID);
+	$stmt->execute();
+	$stmt->bind_result($ID);
+	while ($stmt->fetch()){// For every result there is
+		// Increase the counter for the  number of messages found by 1
+		$messages_found ++;
+	}
+	$stmt->close();
+}
+
+
+// If the number of messages is more than maximum chat length (500), start rewriting the old ones
+if ($messages_found >= $max_chat_length){
+	// Rewrite old message
+	$new_message_ID = $message_ID_ranges['lower_ID'];
+	$stmt = $con->prepare('UPDATE messages_tb SET message_text = ?, message_sender_ID = ?, fk_group_ID = ? WHERE message_ID = ?');
+	$stmt->bind_param('isis', $encryptedMessage, $user_ID, $group_ID, $new_message_ID);
+	$stmt->execute();
+	$stmt->close();
+} else {
+	// Write new message
+	$new_message_ID = $message_ID_ranges['lower_ID'] + $messages_found;
+	// Insert into the messages table, the encrypted message, who sent it and which groupchat it was sent to
+	$stmt = $con->prepare('INSERT INTO messages_tb (message_ID, message_text, message_sender_ID, fk_group_ID) VALUES (?, ?, ?, ?)');
+	$stmt->bind_param('isis', $new_message_ID, $encryptedMessage, $user_ID, $group_ID);
+	$stmt->execute();
+	$stmt->close();
+}
+
+echo $message;
 
 header('Location: /dating_App/fusionflirt1.7/individual_chats_page.php');
 exit();
