@@ -96,7 +96,7 @@ if ($stmt = $con->prepare('SELECT user_ID FROM users_tb WHERE username = ?')) {
 			// Add the user's contact ID to the users table
 			// Find the contact ID
 			$stmt = $con->prepare('SELECT contact_ID FROM contact_details_tb WHERE emailAddress = ? AND phoneNumber = ?');
-			$stmt->bind_param('s', $_POST['email'], $_POST['phone_number']);
+			$stmt->bind_param('si', $_POST['email'], $_POST['phone_number']);
 			$stmt->execute();
 			$stmt->bind_result($contact_ID);
 			$stmt->fetch();
