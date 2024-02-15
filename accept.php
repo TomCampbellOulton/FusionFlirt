@@ -42,6 +42,9 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
         $stmt->bind_param('iii', $responded, $accept, $match_ID);
         $stmt->execute();
         $stmt->close();
+        // Order which user is 1 and which user is 2
+        $user_1_ID = $user_ID;
+        $user_2_ID = $other_user_ID;
 
     }else{// Otherwise they're user 2
         // Record user 1 as having responded in this match
@@ -50,17 +53,21 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
         $stmt->bind_param('iii', $responded, $accept, $match_ID);
         $stmt->execute();
         $stmt->close();
+        // Order which user is 1 and which user is 2
+        $user_1_ID = $other_user_ID;
+        $user_2_ID = $user_ID;
     }
     
     // Now check to see if they have matched with the other user having initiated the matching process
     $stmt = $con->prepare('SELECT user1Responded, user2Responded, accepted FROM matches_tb WHERE fk_user1_ID = ? AND fk_user2_ID = ?');
-    $stmt->bind_param('ii', $user_ID, $other_user_ID);
+    $stmt->bind_param('ii', $user_1_ID, $user_2_ID);
     $stmt->execute();
     $stmt->bind_result($user_responded, $match_responded, $accepted);
     while ($stmt->fetch()) {
         $matched = True;
     }
     // Check if both of them have already responded
+    echo $user_ID, $other_user_ID;
     echo $user_responded,$match_responded;
     if ($user_responded === 1 && $match_responded === 1){ // They have both responded
         echo 'You have both already matched with this person. ';
@@ -96,6 +103,6 @@ if (isset($_POST['respond'])){ // If the user has clicked on accept or decline
         }
     }
 }
-header('Location: /dating_App/fusionflirt1.7/home.php');
-exit();
+//header('Location: /dating_App/fusionflirt1.7/home.php');
+//exit();
 ?>

@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Altering Survey with ID: " . $surveyID;
         // Show that survey
         
-        if ($stmt = $con->prepare('SELECT question_ID, questionNumber, questionText FROM questions_tb WHERE fk_survey_ID = ?')) {
+        if ($stmt = $con->prepare('SELECT question_ID, questionText FROM questions_tb WHERE fk_survey_ID = ?')) {
             // Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
             $stmt->bind_param('i', $surveyID);
             $stmt->execute();
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $ansArr = array();
                     // Find which questions need answering
                     // Get the answers for each question
-                    if ($ansStmt = $con->prepare('SELECT answer_ID, answer, questionAnswerLetter, responseType FROM answers_tb WHERE fk_question_ID = ?')) {
+                    if ($ansStmt = $con->prepare('SELECT answer_ID, answer, questionAnswerLetter, response_type FROM answers_tb WHERE fk_question_ID = ?')) {
                         // Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
                         $ansStmt->bind_param('i', $question['question_ID']);
                         $ansStmt->execute();
@@ -65,13 +65,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ?>
             <form id="question-form">
             <div class="form-container"><?php
+            $q_num = 0;
             foreach ($quesArr as $item){
                 // Split the $item into two components: question and answers
                 $question = $item['question'];
                 $answers = $item['answers'];
                 // Split up the components of that question :)
                 $q_text = $question["questionText"];
-                $q_num = $question["questionNumber"];
+                $q_num ++;
                 $q_ID = $question["question_ID"];
                 ?>
 
@@ -99,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Write out all the answers to the question :)
                 foreach ($answers as $ans){
                     $a_text = $ans['answer'];
-                    $resp_type = $ans['responseType'];
+                    $resp_type = $ans['response_type'];
                     $ans_ID = $ans['answer_ID'];
                     ?>
                     
@@ -152,10 +153,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         }
 
-    } else {
-        // Handle other form elements or show an error message.
-        echo "Invalid request.";
-    }
+} else {
+    // Handle other form elements or show an error message.
+    echo "Invalid request.";
+}
 
 
 

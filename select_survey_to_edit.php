@@ -34,13 +34,6 @@ if (!isset($_SESSION['loggedin'])) {
             $stmt->execute();
         
             $result = $stmt->get_result();
-            foreach ($result as $row){
-            ?><button name="survey" type="submit" value="<?php echo $row['survey_ID'] ?>"> 
-            <?php echo $row['surveyTopic'] ?> 
-            </button>
-            <?php
-            }
-
             foreach ($result as $row) {
                 $surveyID = $row['survey_ID'];
                 ?>

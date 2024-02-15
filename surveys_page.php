@@ -44,9 +44,12 @@ session_regenerate_id();
             $stmt = $con->prepare('SELECT clearanceLevel FROM admins_tb WHERE fk_user_ID = ?');
             $stmt->bind_param('i', $user_ID);
             $stmt->execute();
+			$stmt->bind_result($clearance_level);
+			$stmt->fetch();
+			$stmt->close();
+
             // If the user is an admin
-            if ($stmt->num_rows > 0) {
-				$clearance_level = $stmt->fetch();
+            if (isset($clearance_level)) {
 				if ($clearance_level> 1){// IF the user is Admin AND has clearance?>
 					<p>
 					For Admins Only!!
@@ -61,7 +64,6 @@ session_regenerate_id();
 					</p><?php
 				}
             }
-			$stmt->close();
 			?>
 			<p> Select the survey you would like to answer below: </p>
 			<form action="survey.php" method="post">

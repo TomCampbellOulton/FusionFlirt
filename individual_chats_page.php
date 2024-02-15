@@ -264,7 +264,7 @@ $_SESSION['other_users_name'] = $fname.' '.$sname;
                         $stmt->bind_result($key);
                         $stmt->fetch();
                         if (isset($key)) {
-                            $private_key = $key;
+                            $private_key_filename = $key;
                         }
                         $stmt->close();
                     }else {// Use the 2nd set of keys
@@ -274,10 +274,15 @@ $_SESSION['other_users_name'] = $fname.' '.$sname;
                         $stmt->bind_result($key);
                         $stmt->fetch();
                         if (isset($key)) {
-                            $private_key = $key;
+                            $private_key_filename = $key;
                         }
                         $stmt->close();
                     }
+
+                    // Get the private key
+                    $myfile = fopen($private_key_filename, "r") or die("Unable to open the file!");
+                    $private_key = fread($myfile, filesize($myfile));
+                    fclose($myfile);
 
                     $message = $chat['text'];
                     $decryptedMessage = rsaDecrypt($message, $private_key);

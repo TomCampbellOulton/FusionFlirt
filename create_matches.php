@@ -282,8 +282,8 @@ if (sizeof($users_wants_radio) > 0){
 }
 
 
-//header('Location: /dating_App/fusionflirt1.7/home.php');
-//exit();
+header('Location: /dating_App/fusionflirt1.7/home.php');
+exit();
 
 
 ?>
