@@ -41,11 +41,10 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 	<p>
 	<p>
 		Time to provide your requriements for a partner :D
-		<?php echo $_SESSION['survey_ID']; ?>
 	</p>
 
 	<?php
-	if ($stmt = $con->prepare('SELECT question_ID, questionNumber, questionText FROM questions_tb WHERE fk_survey_ID = ?')) {
+	if ($stmt = $con->prepare('SELECT question_ID, questionText FROM questions_tb WHERE fk_survey_ID = ?')) {
     // Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
     $stmt->bind_param('i', $_SESSION['survey_ID']);
     $stmt->execute();
@@ -56,7 +55,7 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 		foreach ($result as $question){
 			// Find which questions need answering
 			// Get the answers for each question
-			if ($ansStmt = $con->prepare('SELECT answer_ID, answer, questionAnswerLetter, responseType FROM answers_tb WHERE fk_question_ID = ?')) {
+			if ($ansStmt = $con->prepare('SELECT answer_ID, answer, questionAnswerLetter, response_type FROM answers_tb WHERE fk_question_ID = ?')) {
 				// Bind parameters (s = string, i = int, b = blob, etc), in our case the question_ID is an integer so we use "i"
 				$ansStmt->bind_param('i', $question['question_ID']);
 				$ansStmt->execute();
@@ -80,6 +79,7 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 	?>
 	<form action="save_survey_rating_responses.php" method="post">
 	<?php
+	$q_num = 0;
 	// Iterates through the array quesArr to find each question
 	foreach ($quesArr as $item){
 		
@@ -88,7 +88,7 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 		$answers = $item['answers'];
 		// Split up the components of that question :)
 		$q_text = $question["questionText"];
-		$q_num = $question["questionNumber"];
+		$q_num ++;
 		$q_ID = $question["question_ID"];
 		?>
 		<!-- Creates the fieldset within the main form for that question -->
@@ -101,7 +101,7 @@ $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_
 		// Write out all the answers to the question :)
 		foreach ($answers as $ans){
 			$a_text = $ans['answer'];
-			$resp_type = $ans['responseType'];
+			$resp_type = $ans['response_type'];
 			$ans_ID = $ans['answer_ID'];
 			?>
 			

@@ -20,7 +20,120 @@ if ( mysqli_connect_errno() ) {
 // Get the user's ID
 $user_ID = $_SESSION['id'];
 
+// Create a function to perform merge sort
+function mergeSort(&$array, $attribute) {
+    $length = count($array);
 
+    if ($length <= 1) {
+        return;
+    }
+
+    $mid = (int)($length / 2);
+
+    // Divide the array into two halves
+    $left = array_slice($array, 0, $mid);
+    $right = array_slice($array, $mid);
+
+    // Recursively sort the two halves
+    mergeSort($left, $attribute);
+    mergeSort($right, $attribute);
+
+    // Merge the sorted halves
+    merge($array, $left, $right, $attribute);
+	// Return the array
+	return $array;
+}
+
+function merge(&$array, $left, $right, $attribute) {
+    $i = $j = $k = 0;
+
+    while ($i < count($left) && $j < count($right)) {
+        if ($left[$i]->$attribute <= $right[$j]->$attribute) {
+            $array[$k] = $left[$i];
+            $i++;
+        } else {
+            $array[$k] = $right[$j];
+            $j++;
+        }
+        $k++;
+    }
+
+    // Copy the remaining elements of $left, if any
+    while ($i < count($left)) {
+        $array[$k] = $left[$i];
+        $i++;
+        $k++;
+    }
+
+    // Copy the remaining elements of $right, if any
+    while ($j < count($right)) {
+        $array[$k] = $right[$j];
+        $j++;
+        $k++;
+    }
+}
+
+
+// Create a class for the matches
+class UserMatch {
+	// Define the public attributes
+	public $match_ID;
+	public $user_ID;
+	public $score;
+	public $user1_or_user2;
+
+	// Create a class to set all the values upon class being called
+	public function __construct($match_ID, $user_ID, $score, $user1_or_user2){
+		$this->match_ID = $match_ID;
+		$this->user_ID = $user_ID;
+		$this->score = $score;
+		$this->user1_or_user2 = $user1_or_user2;
+	}
+
+	// Create a public function to set the match_ID
+	public function set_match_ID($match_ID){
+		// Set the score of this user
+		$this->match_ID = $match_ID;
+	}
+	// Create a public function to get match ID
+	public function get_match_ID(){
+		// Return the score of this user
+		return $this->match_ID;
+	}
+
+	// Create a public function to set the ID of the user
+	public function set_user_ID($user_ID){
+		// Set the score of this user
+		$this->user_ID = $user_ID;
+	}
+	// Create a public function to get the ID of the user
+	public function get_user_ID(){
+		// Return the score of this user
+		return $this->user_ID;
+	}
+
+	// Create a public function to set the score of the user
+	public function set_score($score){
+		// Set the score of this user
+		$this->score = $score;
+	}
+	// Create a public function to get the score of the user
+	public function get_score(){
+		// Return the score of this user
+		return $this->score;
+	}
+
+	// Create a public function to set if user 1 or 2
+	public function set_user1_or_user2($user1_or_user2){
+		// Set the score of this user
+		$this->user1_or_user2 = $user1_or_user2;
+	}
+	// Create a public function to get if user 1 or 2
+	public function get_user1_or_user2(){
+		// Return the score of this user
+		return $this->user1_or_user2;
+	}
+}
 ?>
 
 
@@ -47,8 +160,7 @@ $user_ID = $_SESSION['id'];
 		<div class="content">
 			<h2>Home Page</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<p>Ello!</p>
-			<p>Para</p>
+			
 
 			<p>
 			<?php
@@ -56,10 +168,10 @@ $user_ID = $_SESSION['id'];
 
 
 			// Checks how many matches there were
-			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID, user1Responded, user2Responded FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ? ORDER BY score ASC');
+			$stmt = $con->prepare('SELECT match_ID, fk_user1_ID, fk_user2_ID, user1Responded, user2Responded, score FROM matches_tb WHERE fk_user1_ID = ? OR fk_user2_ID = ?');
 			$stmt->bind_param('ii', $user_ID, $user_ID);
 			$stmt->execute();
-			$stmt->bind_result($match_ID, $user1_ID, $user2_ID, $user1Responded, $user2Responded);
+			$stmt->bind_result($match_ID, $user1_ID, $user2_ID, $user1Responded, $user2Responded, $score);
 
 			// The user's ID
 			$user_ID = $_SESSION["id"];
@@ -90,18 +202,21 @@ $user_ID = $_SESSION['id'];
 				}
 
 				if ($response === 0){ // If the user has not responded yet
-					$matches[] = array('match_ID'=>$match_ID, 'users_ID'=>$matches_ID, 'user1OrUser2'=>$u1Or2);
+					$matches[] = new UserMatch($match_ID, $matches_ID, $score, $u1Or2);
 				}
 			}
 			$stmt->close();
 
+			// Sort the matches with the highest score at the top of the stack
+			mergeSort($matches, 'score');
+
 			if (sizeof($matches) > 0){// If there is more than 1 match in the stack, start iterating through the stack
 				$new_match = array_pop($matches);
 				// Display this match
-				$matches_user_ID = $new_match['users_ID'];
+				$matches_user_ID = $new_match->get_user_ID();
 				echo 'users ID = '.$matches_user_ID;
 				// User 1 or User 2
-				$u1Or2 = $new_match['user1OrUser2'];
+				$u1Or2 = $new_match->get_user1_or_user2();
 
 				// Get their profile ID and other personal details
 				$stmt = $con->prepare('SELECT username, firstname, surname, dateOfBirth, fk_contact_ID, fk_profile_ID FROM users_tb WHERE user_ID = ?');
@@ -132,7 +247,6 @@ $user_ID = $_SESSION['id'];
 				echo '<br>Biography - '.$biography;
 
 				// Get their pictures
-
 
 				// Show the user all their images
 				$stmt = $con->prepare('SELECT fk_image_ID FROM images_profile_link_tb WHERE fk_profile_ID = ?');
@@ -172,10 +286,10 @@ $user_ID = $_SESSION['id'];
 
 				<!-- Add the accept and reject buttons -->
 				<form method='POST' action='reject.php'>
-				<button type='submit' value='<?php echo $new_match['match_ID']; ?>' name='respond'>Reject</button>
+				<button type='submit' value='<?php echo $new_match->match_ID; ?>' name='respond'>Reject</button>
 				</form>
 				<form method='POST' action='accept.php'>
-				<button type='submit' value='<?php echo $new_match['match_ID']; ?>' name='respond'>Accept</button>
+				<button type='submit' value='<?php echo $new_match->match_ID; ?>' name='respond'>Accept</button>
 				<!-- Add a hidden input field to include the id attribute -->
 				<input type='hidden' value='<?php echo $u1Or2; ?>' name='user1Or2'>
 				<input type='hidden' value='<?php echo $matches_user_ID; ?>' name='other_user_ID'>
@@ -183,7 +297,7 @@ $user_ID = $_SESSION['id'];
 				<?php
 
 			} else{ // There are no matches
-				echo "no matches :c";
+				echo "You currently have no matches.";
 			}
 			
 			?>

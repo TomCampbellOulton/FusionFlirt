@@ -1,11 +1,7 @@
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
-	exit;
-}
+
 
 $DATABASE_HOST = 'localhost';
 $DATABASE_USER = 'root';
@@ -35,15 +31,18 @@ $username = $_POST['username'];
 $password = generatePassword();
 
 // Find the user's ID
-$stmt = $con->prepare('SELECT user_ID, contact_ID FROM users_tb WHERE username = ?');
+$stmt = $con->prepare('SELECT user_ID, fk_contact_ID FROM users_tb WHERE username = ?');
 $stmt->bind_param('s', $username);
 $stmt->execute();
 $stmt->bind_result($user_ID, $contact_ID);
 $stmt->fetch();
 $stmt->close();
-
+// Check this user exists
+if (!isset($user_ID)){
+    exit('This username does not exist.');
+}
 // We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
-$hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert this new password into the database
 $stmt = $con->prepare('UPDATE users_tb SET hashedPassword = ? WHERE user_ID = ?');
@@ -64,7 +63,7 @@ $stmt->close();
 $from    = 'fusionflirtauthentication@gmail.com';
 $subject = 'You reset your password. Here is your new password';
 $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
-$message = '<p> Here is your new password ="' . $password . '</p>';
+$message = '<p> Here is your new password =' . $password . '</p>';
 mail($email, $subject, $message, $headers);
 echo 'Please check your email to find your new password.';
 

@@ -141,11 +141,12 @@ def clean(file):
     Group_ID = 1
     # Question ID counter - increases once per question completed
     question_ID = 1
+    response_string2 = f"\nINSERT INTO survey_tb (surveyTopic) VALUES "
     for title in clean_data:      
         print(f"Now on Group_ID {Group_ID}")
-        
-        response_string2 = f"INSERT INTO survey_tb (surveyTopic) VALUES (\"{title}\");\n"
-        SQL_Command_Groups += response_string2
+        response_string2 += f'("{title}"),'
+        # Create a string to contain each question
+        questions_string = "\nINSERT INTO questions_tb (questionText, fk_survey_ID) VALUES "
         for question in clean_data[title]:
             
             print(f"Now on question {question_ID}")
@@ -160,9 +161,9 @@ def clean(file):
             text = "".join(Q_List[1:])
 
             # Insert the actual question into the table
-            questions_string = f"INSERT INTO questions_tb (questionText, fk_survey_ID) VALUES {text,Group_ID};\n"
-            SQL_Command += questions_string
+            questions_string += f"{text,Group_ID},"
             
+            answers_string = ""
 
             # Iterate through all responses to the question
             for response in clean_data[title][question]:
@@ -194,16 +195,21 @@ def clean(file):
                 else:
                     input("Error D:")
 
-                
+            
 
                 # Format for SQL
                 #"INSERT INTO table_name (column_names) VALUES ()""
+                answers_string += f'{text, Q_Section_Letter, question_ID, Response_Type},'
                 
-                answers_string = f"INSERT INTO answers_tb (answer, questionAnswerLetter, fk_question_ID, response_type) VALUES {text, Q_Section_Letter, question_ID, Response_Type};\n"
-                SQL_Command_answers += answers_string
+            if len(answers_string)>0:
+                SQL_Command_answers += f"\nINSERT INTO answers_tb (answer, questionAnswerLetter, fk_question_ID, response_type) VALUES "+answers_string[:-1]+";"
+
             print(Q_Num)
             question_ID += 1
+        SQL_Command += questions_string[:-1]+';'
         Group_ID += 1
+    
+    SQL_Command_Groups += response_string2[:-1]+';'
     input()
     print(SQL_Command)
     f= open("SQL code questions_tb.txt","w", encoding="utf-8")
@@ -239,3 +245,4 @@ print(fullCode)
 f = open("Full SQL Code.txt", "w", encoding="utf-8")
 f.write(fullCode)
 f.close()
+print(len(SQL_Command_answers))

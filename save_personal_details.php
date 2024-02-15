@@ -25,10 +25,11 @@ if (isset($_POST['submitChanges'])){
     $dob = $_POST['date_of_birth'];
     $phone_num = $_POST['phone_number'];
     $email = $_POST['email_address'];
+    $contact_ID = $_SESSION["contact_ID"];
     
     // Update the user's email
-    $stmt = $con->prepare('UPDATE contact_details_tb SET emailAddress = ?, phoneNumber = ? VALUES WHERE user_ID = ?');
-    $stmt->bind_param('sii', $_POST['email'], $_POST['phone_number'], $user_ID);
+    $stmt = $con->prepare('UPDATE contact_details_tb SET emailAddress = ?, phoneNumber = ? WHERE contact_ID = ?');
+    $stmt->bind_param('sii', $email, $phone_num, $contact_ID);
     $stmt->execute();
     $stmt->close();
     
@@ -39,7 +40,8 @@ if (isset($_POST['submitChanges'])){
     $stmt->close();
 
 
-
 }
+header('Location: /dating_App/fusionflirt1.7/profile.php');
+exit();
 
 ?>

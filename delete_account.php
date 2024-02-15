@@ -19,6 +19,12 @@ if ( mysqli_connect_errno() ) {
 }
 // Delete the account
 $user_ID = $_SESSION['id'];
+$stmt = $con->prepare('DELETE FROM authentication_tb WHERE fk_user_ID = ?');
+$stmt->bind_param('i', $user_ID);
+$stmt->execute();
+$stmt->close();
+// Delete the account
+$user_ID = $_SESSION['id'];
 $stmt = $con->prepare('DELETE FROM users_tb WHERE user_ID = ?');
 $stmt->bind_param('i', $user_ID);
 $stmt->execute();
@@ -26,6 +32,6 @@ $stmt->close();
 // Remove their session ID
 $_SESSION['id'] = NULL;
 // Return them to the homepage
-header('Location: /dating_App/fusionflirt1.7/index.php');
+header('Location: /dating_App/fusionflirt1.7/index.html');
 exit();
 ?>

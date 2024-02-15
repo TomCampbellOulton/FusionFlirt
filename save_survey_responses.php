@@ -31,7 +31,7 @@ $stmt->close();
 $answers = array();
 foreach ($questions as $question){
 	$stmt = $con->prepare('SELECT answer_ID FROM answers_tb WHERE fk_question_ID = ?');
-	$stmt->bind_param('i', $survey_ID);
+	$stmt->bind_param('i', $question);
 	$stmt->execute();
 	$stmt->bind_result($a_ID);
 	while ($stmt->fetch()){// Add the ID of all the answers in the question to an array
@@ -55,7 +55,7 @@ function in_my_array($needle, $haystack){
 
 // Create an array of all the responses the user has currently provided for this survey
 $users_answers = array();
-$stmt = $con->prepare('SELECT users_response, fk_answer_ID, response_ID FROM users_response_tb WHERE fk_user_ID = ?');
+$stmt = $con->prepare('SELECT usersResponse, fk_answer_ID, response_ID FROM users_response_tb WHERE fk_user_ID = ?');
 $stmt->bind_param('i', $user_ID);
 $stmt->execute();
 $stmt->bind_result($response, $fk_answer_ID, $response_ID);
@@ -96,39 +96,32 @@ while ($stmt->fetch()){
 		</div>
 	</body>
 	<p>
-		The data being collected from you bae 😙
 		<?php
 		// Record the responses
 		$new_responses = array();
 		// Iterate the _POST data
 		foreach ($_POST as $question_ID=>$ans_ID){
-			echo "<br>";
-			echo "QID = ".$question_ID." - AID = ".$ans_ID;
 			$new_responses[] = $ans_ID;
 			// Check if the user has already responded to that question
-			$stmt = $con->prepare('SELECT users_response FROM users_response_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+			$stmt = $con->prepare('SELECT usersResponse FROM users_response_tb WHERE fk_user_ID = ? AND fk_answer_ID = ?');
 			$stmt->bind_param('ii', $user_ID, $ans_ID);
-			echo ' UID='.$user_ID, $ans_ID;
 			$stmt->execute();
 			$stmt->store_result();
-			$stmt->fetch();
 			// Stores the state to store
 			$state = 'on';
 			// If the user has already responded
 			if ($stmt->num_rows > 0) {
 				$stmt->close();
 				// Update the users response
-				$stmt = $con->prepare('UPDATE users_response_tb SET users_response = ? WHERE fk_user_ID = ? AND fk_answer_ID = ?');
+				$stmt = $con->prepare('UPDATE users_response_tb SET usersResponse = ? WHERE fk_user_ID = ? AND fk_answer_ID = ?');
 				$stmt->bind_param('sii', $state, $user_ID, $ans_ID);
 				$stmt->execute();
 				$stmt->close();
-				echo 'updating'.$ans_ID;
 
 			} else { // The user has not responded to that question
 				$stmt->close();
 				// Insert into the user's responses tb
-				echo 'inserting '.$ans_ID;
-				$stmt = $con->prepare('INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, users_response) VALUES (?, ?, ?)');
+				$stmt = $con->prepare('INSERT INTO users_response_tb (fk_user_ID, fk_answer_ID, usersResponse) VALUES (?, ?, ?)');
 				$stmt->bind_param('iis', $user_ID, $ans_ID, $state);
 				$stmt->execute();
 				$stmt->close();
@@ -143,9 +136,7 @@ while ($stmt->fetch()){
 				$stmt->bind_param('i', $ans_ID['response_ID']);
 				$stmt->execute();
 				$stmt->close();
-			};
-			echo '<br>aid - '.$ans_ID['ans_ID'].'<br>';
-			echo in_array($ans_ID['ans_ID'], $new_responses);
+			}
 		}
 	
 		?>
